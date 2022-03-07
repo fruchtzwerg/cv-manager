@@ -1,0 +1,59 @@
+import { defineStore } from 'pinia';
+import { Section, SectionPart } from '../models/content.model';
+import { v4 as uuid } from 'uuid';
+import { CSSProperties } from 'vue';
+
+type Icon = 'web' | 'mail' | 'phone' | 'address';
+
+interface Skill {
+  heading: string;
+  entries: string[];
+}
+
+interface Content {
+  sections: Section[];
+}
+
+type Style = 'sidebar';
+
+interface ContentState {
+  contactInfo: Partial<Record<Icon, string | string[]>>;
+  skills: Skill[];
+  content: Content;
+  style: Record<Style, CSSProperties>;
+}
+
+export const useContentStore = defineStore('content', {
+  state: (): ContentState => ({
+    contactInfo: {},
+    skills: [],
+    content: {
+      sections: [],
+    },
+    style: {
+      sidebar: {
+        width: 'min-content',
+      },
+    },
+  }),
+  getters: {
+    download: state => {
+      const { contactInfo, skills, content, style } = state;
+
+      return `data:text/json;charset=utf-8,${encodeURIComponent(
+        JSON.stringify({ contactInfo, skills, content, style })
+      )}`;
+    },
+    hasContent: state => !!state.content.sections?.length,
+  },
+  actions: {
+    addPart(section: Section, part: Omit<SectionPart, 'id'>) {
+      const id = uuid();
+      this.content.sections
+        ?.find(s => s === section)
+        ?.parts.push({ id, ...part });
+    },
+  },
+
+  persist: true,
+});

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=100%, initial-scale=1.0" />
+    <title>CV</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <h2>Kontakt</h2>
+        <p>
+          <span class="contact-container">
+            <img src="./icons/material/phone.svg" class="contact-icon" />
+            <a href="tel:+4915156177881">+49 151 56177881</a>
+          </span>
+          <br />
+          <br />
+          <span class="contact-container">
+            <img src="./icons/material/web.svg" class="contact-icon" />
+            <a href="https://montazer.dev">https://montazer.dev</a>
+          </span>
+          <br />
+          <span class="contact-container">
+            <img src="./icons/material/mail.svg" class="contact-icon" />
+            <a style="font-weight: bold" href="mailto:benjamin@montazer.dev"
+              >benjamin@montazer.dev</a
+            >
+          </span>
+        </p>
+
+        <div class="container adress-container">
+          <img
+            src="./icons/material/location.svg"
+            style="grid-area: icon"
+            class="contact-icon"
+          />
+
+          <div style="grid-area: street">Kirchstraße 27</div>
+          <div style="grid-area: city">86637 Wertingen</div>
+        </div>
+
+        <h3>Top-Kenntnisse</h3>
+
+        <h4>Technologien</h4>
+        <ul>
+          <li>TypeScript</li>
+          <li>Node</li>
+          <li>REST</li>
+          <li>Git + Gitlab CI</li>
+        </ul>
+
+        <h4>Frameworks</h4>
+        <ul class="frameworks">
+          <li>Express</li>
+          <li>Nestjs</li>
+          <li>TypeORM</li>
+        </ul>
+
+        <h4>Kompetenzen</h4>
+        <ul>
+          <li>Mentoring</li>
+          <li>Web Architektur</li>
+          <li>Fullstack Engineering</li>
+        </ul>
+
+        <h4>Sprachen</h4>
+        <ul>
+          <li>Deutsch (fließend)</li>
+          <li>Englisch (fließend)</li>
+          <li>Bayerisch (ausbaufähig)</li>
+        </ul>
+      </aside>
+
+      <!-- Main -->
+      <div id="content">
+        <!-- About -->
+        <section id="about">
+          <h1>Benjamin Montazer</h1>
+          <h2>Senior Software Engineer</h2>
+          <h3>Entwickler mit breiter Basis und Leidenschaft fürs Web.</h3>
+          <p>
+            Wie bei vielen Software Entwicklern drehte sich bereits als Kind
+            meine Freizeitgestaltung um den PC. Meinen ersten eigenen Rechner
+            erhielt ich mit 6 Jahren. Seither tauche ich immer tiefer in die
+            digitale Welt ab - unterbrochen vom gelegentlichen Luftholen beim
+            Grillen, Skifahren oder Kochen mit Freunden.
+          </p>
+          <p>
+            Als Fullstack Entwickler konnte ich Erfahrungen mit einer Vielzahl
+            an Technologien, Sprachen und Frameworks sammeln. Von Java/Android
+            über Dart/Flutter zu diversen Node-Frameworks habe ich alles
+            ausprobiert und mich schließlich in Angular/Nestjs spezialisiert.
+          </p>
+          <p>
+            Das Mentoring von junioren Teammitgliedern empfinde ich als
+            besonders lohnenswert. Ich gebe gerne wegweisende Ratschläge und
+            nehme ebensogerne auch neue Impulse auf.
+          </p>
+          <p>
+            Großen Wert lege ich auf transparente, offene und unkomplizierte
+            Kommunikation. Ich gebe offenes Feedback und erwarte selbiges auch
+            im Gegenzug.
+          </p>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="pagebreak">
+          <h1>Ausgewählte Projekte</h1>
+
+          <!-- SMA -->
+          <div class="project">
+            <h2>EnnexOS - Energiemanagement Plattform für SMA</h2>
+            <h3>Senior Software Engineer / Frontend Architect</h3>
+            <h4>
+              Scrum | TypeScript | Angular | Webpack | ESLint | NX | Jest |
+              Bitbucket | Jira
+            </h4>
+            <h5>1,5 Jahre</h5>
+            <a class="ref" href="https://ennexos.com/">https://ennexos.com</a>
+            <p>
+              EnnexOS ist eine Managementplattform für Data Manager von SMA. Die
+              Tätigkeit fand im Rahmen des "SMA Data Manager L" statt, ein Gerät
+              zur Verwaltung von PV-Großanlagen.
+            </p>
+            <p>
+              Das Aufgabengebiet umfasste Frontend Architektur und Code-Reviews,
+              Management der komplexen Regelungstechnik des Data Managers sowie
+              Datenvisualisierung für Monitoring und Langzeitanalyse.
+            </p>
+            <p>
+              Aufgrund der hohen Komplexität des Systems musste besonderer Wert
+              auf Wiederverwendbarkeit und Wartbarkeit der Komponenten, sowie
+              exzellente Codequalität gelegt werden.
+            </p>
+          </div>
+
+          <!-- BMW Charging -->
+          <div class="project">
+            <h2>BMW Charging</h2>
+            <h3>Software Architect</h3>
+            <h4>Node | TypeScript | MobX | MQTT</h4>
+            <h5>1 Jahr</h5>
+            <p>
+              Entwicklung einer OAP App zur Anzeige von Ladestationen als Point
+              of Interest (POI) im Navigationssystem von Elektrofahrzeugen.
+              Management von BMW Charging Verträgen und Accounts im Fahrzeug.
+            </p>
+            <p>
+              Die App kommuniziert über den Fahrzeugbus mit dem BMW/Mini
+              Navigationssystem und stellt diesem POIs zur Verfügung.
+            </p>
+            <p>
+              Ladestationen werden über eine MQTT Schnittstelle von
+              Microservices abgerufen. Der Nutzer wird über OpenID Connect
+              authentifiziert.
+            </p>
+            <p>Logging und Monitoring geschieht mithilfe des ELK Stacks.</p>
+          </div>
+
+          <!-- Infosystem -->
+          <div class="project pagebreak">
+            <h2>Infosystem der Hochschule Stralsund</h2>
+            <h3>Fullstack Engineer</h3>
+            <h4>Vue.js | Spring Boot | Microservices | Gitlab CI | Docker</h4>
+            <h5>2 Jahre</h5>
+            <p>
+              Entwicklung des Infosystems der Informatik Fakultät der Hochschule
+              Stralsund.
+            </p>
+            <p>
+              Mitarbeiter, Studenten und Besucher nutzen ein
+              Touchscreen-Terminal im Eingangsbereich. Das Terminal stellt
+              diverse Dienste zur Verfügung, wie etwa In-Door Navigation über
+              Gebäudepläne, Mensa-Speisepläne, Stundenpläne, etc.
+            </p>
+            <p>
+              Mitarbeiter der Hochschule nutzen ein Adminpanel zur Verwaltung
+              der Inhalte.
+            </p>
+            <p>
+              Continuous Deployment über Gitlab CI auf, vom Rechenzentrum
+              bereitgestellten VMs.
+            </p>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+          <h1>Werdegang</h1>
+
+          <!-- MW -->
+          <div class="project">
+            <h3>MaibornWolff GmbH</h3>
+            <h4>Senior Software Engineer</h4>
+            <h5>01/2019 - 01/2022</h5>
+            <p>
+              Web-Engineering in diversen agilen Projektumfeldern;
+              Energiemanagement, Automotive Navigation Systems, Öffentlicher
+              Dienst, Reasearch and Development.
+            </p>
+          </div>
+
+          <!-- STZ -->
+          <div class="project">
+            <h3>
+              Steinbeis-Transferzentrum - Projektierung und Evaluierung von
+              Netzwerken
+            </h3>
+            <h4>Software Engineer</h4>
+            <h5>03/2018 - 10/2018</h5>
+            <p>
+              C#/WPF im Bereich Energiemanagement, Netzwerkanalyse und Embedded
+              Systems. Vollzeit Entwickler parallel zum Studium des Masters.
+            </p>
+          </div>
+
+          <!-- MSC -->
+          <div class="project">
+            <h3>Master of Science - Informatik</h3>
+            <h4>Hochschule Stralsund</h4>
+            <h5>2013 - 2018</h5>
+            <p>Note: 1,6</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  @media print {
+    .pagebreak {
+      page-break-before: always;
+      margin-top: 0;
+    }
+  }
+
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  p {
+    font-family: Quicksand;
+  }
+
+  body {
+    max-width: 21cm;
+    width: 21cm;
+    margin: 0;
+  }
+
+  a,
+  a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+  a.ref {
+    color: #e1232b;
+    font-size: 0.85rem;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  .contact-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .adress-container {
+    display: grid;
+    grid-template-areas:
+      'icon street'
+      'empty city';
+    align-items: center;
+    column-gap: 0.5em;
+    row-gap: 0.15em;
+  }
+
+  aside {
+    padding: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 8rem;
+    line-height: 1.25em;
+    background-color: #540d10;
+    color: white;
+  }
+
+  aside h3,
+  aside h4 ~ h4 {
+    margin-top: 3rem;
+  }
+
+  aside ul {
+    padding-left: 1.5rem;
+  }
+
+  aside li {
+    list-style: circle;
+  }
+
+  #content {
+    padding: 3rem 1rem;
+    padding-bottom: 8rem;
+  }
+
+  #content #about h1 {
+    font-size: 3rem;
+    margin-top: 0;
+  }
+
+  #content h1 {
+    font-size: 2.25rem;
+  }
+
+  #content h3,
+  #content h4,
+  #content h5 {
+    margin: 0.25rem 0;
+  }
+
+  #content h2 {
+    font-size: 1.65rem;
+    text-decoration: underline;
+    font-weight: 900;
+    color: #a91a20;
+  }
+
+  section + section {
+    margin-top: 5rem;
+  }
+
+  .project + .project {
+    margin-top: 3rem;
+  }
+
+  #content h3 {
+    font-size: 1.5rem;
+    font-weight: 200;
+    color: #c51f26;
+  }
+
+  #content h4 {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #8d161b;
+  }
+
+  #content h5 {
+    color: #e1232b;
+  }
+
+  img.contact-icon {
+    height: 1em;
+  }
+
+  img.inline {
+    display: inline-flex;
+    padding: 0.125rem;
+    height: 1.125em;
+    width: 1.125em;
+    margin-left: 0.25rem;
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  .frameworks li div {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.35rem;
+  }
+</style>

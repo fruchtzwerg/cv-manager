@@ -1,0 +1,28 @@
+{
+  "root": "apps/cv-vue-e2e",
+  "sourceRoot": "apps/cv-vue-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/cv-vue-e2e/cypress.json",
+        "devServerTarget": "cv-vue:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "cv-vue:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cv-vue-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["cv-vue"]
+}
