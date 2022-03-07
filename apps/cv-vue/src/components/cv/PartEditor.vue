@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="editor">
     <input v-model="cache.heading" placeholder="heading" class="heading" />
     <input v-model="cache.title" placeholder="title" class="title" />
     <input v-model="cache.caption" placeholder="caption" class="caption" />
@@ -88,12 +88,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-input {
-  display: block;
-  border: 0;
-  width: 100%;
-}
-
 .p-editor-container {
   margin-top: 1rem;
 }

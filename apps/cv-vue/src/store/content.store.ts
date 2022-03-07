@@ -53,6 +53,27 @@ export const useContentStore = defineStore('content', {
   },
 
   actions: {
+    patchSection(id: string, section: Partial<Omit<Section, 'id' | 'parts'>>) {
+      const index = this.content.sections.findIndex(s => s.id === id);
+
+      if (index < 0) throw new Error(`No section found with id '${id}'`);
+
+      this.content.sections.splice(index, 1, {
+        ...this.content.sections[index],
+        ...section,
+      });
+    },
+
+    patchPart(id: string, sectionId: string, part: Omit<SectionPart, 'id'>) {
+      const sec = this.content.sections.find(s => s.id === sectionId);
+      const index = sec?.parts.findIndex(p => p.id === id);
+
+      if (index == null || index < 0)
+        throw new Error(`No part found with id '${id}'`);
+
+      sec?.parts.splice(index, 1, { ...sec.parts[index], ...part });
+    },
+
     addPart(section: Section, part: Omit<SectionPart, 'id'>) {
       const id = uuid();
       this.content.sections

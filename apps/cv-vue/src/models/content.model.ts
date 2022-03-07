@@ -7,7 +7,7 @@ export interface Section {
   id: string;
   active: boolean;
   pagebreak: boolean;
-  heading: string | null;
+  heading?: string;
   parts: SectionPart[];
 }
 
