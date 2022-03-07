@@ -10,21 +10,15 @@
       <template #item="{ element: section }">
         <li class="item section">
           <h3>
-            {{ section.heading ?? '---' }}
+            <div>{{ section.heading ?? '---' }}</div>
+            <Button
+              icon="pi pi-trash"
+              class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
+              @click="confirmDeleteSection(section)"
+            ></Button>
             <Checkbox v-model="section.active" :binary="true"></Checkbox>
           </h3>
 
-          <button
-            @click="
-              addPart(section, {
-                active: true,
-                pagebreak: false,
-                heading: section.parts.length.toString(),
-              })
-            "
-          >
-            add
-          </button>
           <draggable
             v-model="section.parts"
             tag="ol"
@@ -39,13 +33,48 @@
                   :draggable="false"
                 />
                 <div>{{ getHeading(part) }}</div>
+                <Button
+                  icon="pi pi-trash"
+                  class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
+                  @click="confirmDeletePart(part, section.id)"
+                ></Button>
                 <Checkbox v-model="part.active" :binary="true"></Checkbox>
               </li>
             </template>
           </draggable>
+
+          <Button
+            class="p-button-text p-button-rounded p-button-sm add-btn"
+            label="Add paragraph"
+            icon="pi pi-plus"
+            @click="
+              addPart(section, {
+                active: true,
+                pagebreak: false,
+                heading: (section.parts.length + 1).toString(),
+              })
+            "
+          >
+          </Button>
         </li>
       </template>
     </draggable>
+
+    <Button
+      class="p-button-text p-button-rounded p-button-sm add-btn"
+      label="Add section"
+      icon="pi pi-plus"
+      @click="
+        addSection({
+          active: true,
+          pagebreak: false,
+          heading: (content.sections.length + 1).toString(),
+        })
+      "
+    >
+    </Button>
+
+    <ConfirmDialog></ConfirmDialog>
   </div>
 </template>
 
@@ -53,11 +82,14 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
-import { SectionPart } from '../../models/content.model';
+import { Section, SectionPart } from '../../models/content.model';
 import { useContentStore } from '../../store';
 
 import draggable from 'vuedraggable';
+import Button from 'primevue/button';
 import Checkbox from 'primevue/checkbox';
+import ConfirmDialog from 'primevue/confirmdialog';
+import { useConfirm } from 'primevue/useconfirm';
 
 const excludeKeys: (keyof SectionPart)[] = ['active', 'id'];
 const isHeading = ([key, value]: [string, unknown]) =>
@@ -70,14 +102,50 @@ const getHeading = (part: SectionPart) =>
 
 export default defineComponent({
   name: 'ContentManager',
-  components: { draggable, Checkbox },
+  components: { draggable, Button, Checkbox, ConfirmDialog },
   setup() {
     const store = useContentStore();
-    const { addPart } = store;
-
+    const { addPart, removePart, addSection, removeSection } = store;
     const { content } = storeToRefs(store);
 
-    return { content, getHeading, addPart };
+    const confirm = useConfirm();
+
+    const confirmDeleteSection = (section: Section) => {
+      confirm.require({
+        message: `Are you sure you want to delete ${section.heading}?`,
+        header: `Delete ${section.heading}`,
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          removeSection(section.id);
+        },
+      });
+    };
+    const confirmDeletePart = (part: SectionPart, sectionid: Section['id']) => {
+      const heading = getHeading(part);
+
+      confirm.require({
+        message: `Are you sure you want to delete ${heading}?`,
+        header: `Delete ${heading}`,
+        icon: 'pi pi-exclamation-triangle',
+        position: 'right',
+        accept: () => {
+          removePart(part.id, sectionid);
+        },
+      } as any);
+    };
+
+    const actions = {
+      addPart,
+      confirmDeletePart,
+      addSection,
+      confirmDeleteSection,
+    };
+
+    return {
+      content,
+      getHeading,
+      ...actions,
+    };
   },
 });
 </script>
@@ -91,11 +159,8 @@ export default defineComponent({
 
 .list {
   padding: 0;
+  margin: 0;
   list-style-type: none;
-}
-
-.p-checkbox {
-  margin-left: auto;
 }
 
 .item {
@@ -112,7 +177,20 @@ export default defineComponent({
 
     h3 {
       display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+  }
+
+  .p-button-xs {
+    $size: 2rem;
+    min-width: $size;
+    width: $size;
+    height: $size;
+  }
+
+  .pad-left {
+    margin-left: auto;
   }
 
   &.part {
@@ -125,5 +203,9 @@ export default defineComponent({
       height: 1.5em;
     }
   }
+}
+
+.add-btn {
+  margin-top: 1rem;
 }
 </style>

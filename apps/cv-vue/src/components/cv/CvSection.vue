@@ -149,12 +149,6 @@ section,
 .part + .part {
   margin-top: 3rem;
 }
-
-.text {
-  color: black;
-  font-family: Quicksand;
-  text-align: justify;
-}
 </style>
 
 <style lang="scss">
@@ -198,6 +192,12 @@ section,
 .href {
   color: #e1232b;
   font-size: 0.85rem;
+}
+
+.text {
+  color: black;
+  font-family: Quicksand;
+  text-align: justify;
 }
 
 .editor input {

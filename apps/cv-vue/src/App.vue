@@ -2,7 +2,7 @@
   <Preview id="preview"></Preview>
   <Sidebar
     id="sidebar"
-    :style="{ width: sidebar.open ? '256px' : 0 }"
+    :style="{ width: sidebar.open ? 'var(--sidebar-width)' : 0 }"
   ></Sidebar>
 </template>
 
@@ -49,11 +49,15 @@ export default defineComponent({
   transition: width 0.5s ease-out;
 
   height: 100vh;
-  overflow: auto;
+  max-height: 100vh;
 }
 </style>
 
 <style lang="scss">
+:root {
+  --sidebar-width: 20rem;
+}
+
 @media print {
   .pagebreak {
     page-break-before: always;

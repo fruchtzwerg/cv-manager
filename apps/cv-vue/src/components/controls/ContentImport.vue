@@ -7,7 +7,7 @@
   />
   <Button
     label="Load"
-    icon="pi pi-upload"
+    icon="pi pi-download"
     class="p-button-rounded p-button-outlined"
     @click="file.click()"
   />

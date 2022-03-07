@@ -62,6 +62,12 @@ const trimEnd = (text: string | undefined, tail = '<p><br></p>'): string => {
     : text;
 };
 
+const trimEmpty = (props: any) =>
+  Object.entries(props).reduce(
+    (acc, [key, value]) => ({ ...acc, [key]: value || undefined }),
+    {}
+  );
+
 export default defineComponent({
   name: 'PartEditor',
   components: { Editor, Button },
@@ -78,7 +84,7 @@ export default defineComponent({
     const cache = ref({ ...props });
 
     const result = computed(() => ({
-      ...cache.value,
+      ...trimEmpty(cache.value),
       text: trimEnd(cache.value.text),
     }));
 

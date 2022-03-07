@@ -2,6 +2,8 @@ import { defineStore } from 'pinia';
 import { Section, SectionPart } from '../models/content.model';
 import { v4 as uuid } from 'uuid';
 import { CSSProperties } from 'vue';
+import { SectionNotFoundError } from '../utils/section-not-found.error';
+import { PartNotFoundError } from '../utils/part-not-found.error';
 
 type Icon = 'web' | 'mail' | 'phone' | 'address';
 
@@ -53,25 +55,26 @@ export const useContentStore = defineStore('content', {
   },
 
   actions: {
-    patchSection(id: string, section: Partial<Omit<Section, 'id' | 'parts'>>) {
+    addSection(section: Omit<Section, 'id' | 'parts'>) {
+      this.content.sections.push({ id: uuid(), parts: [], ...section });
+    },
+    patchSection(
+      id: Section['id'],
+      section: Partial<Omit<Section, 'id' | 'parts'>>
+    ) {
       const index = this.content.sections.findIndex(s => s.id === id);
-
-      if (index < 0) throw new Error(`No section found with id '${id}'`);
+      if (index < 0) throw new SectionNotFoundError(id);
 
       this.content.sections.splice(index, 1, {
         ...this.content.sections[index],
         ...section,
       });
     },
+    removeSection(id: Section['id']) {
+      const index = this.content.sections.findIndex(s => s.id === id);
+      if (index < 0) throw new SectionNotFoundError(id);
 
-    patchPart(id: string, sectionId: string, part: Omit<SectionPart, 'id'>) {
-      const sec = this.content.sections.find(s => s.id === sectionId);
-      const index = sec?.parts.findIndex(p => p.id === id);
-
-      if (index == null || index < 0)
-        throw new Error(`No part found with id '${id}'`);
-
-      sec?.parts.splice(index, 1, { ...sec.parts[index], ...part });
+      this.content.sections.splice(index, 1);
     },
 
     addPart(section: Section, part: Omit<SectionPart, 'id'>) {
@@ -79,6 +82,26 @@ export const useContentStore = defineStore('content', {
       this.content.sections
         ?.find(s => s === section)
         ?.parts.push({ id, ...part });
+    },
+    patchPart(
+      id: SectionPart['id'],
+      sectionId: Section['id'],
+      part: Omit<SectionPart, 'id'>
+    ) {
+      const sec = this.content.sections.find(s => s.id === sectionId);
+      const index = sec?.parts.findIndex(p => p.id === id);
+
+      if (index == null || index < 0) throw new PartNotFoundError(id);
+
+      sec?.parts.splice(index, 1, { ...sec.parts[index], ...part });
+    },
+    removePart(id: SectionPart['id'], sectionId: Section['id']) {
+      const sec = this.content.sections.find(s => s.id === sectionId);
+      const index = sec?.parts.findIndex(p => p.id === id);
+
+      if (index == null || index < 0) throw new PartNotFoundError(id);
+
+      sec?.parts.splice(index, 1);
     },
   },
 
