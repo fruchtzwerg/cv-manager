@@ -1,7 +1,7 @@
 <template>
   <Button
     label="Save"
-    icon="pi pi-download"
+    icon="pi pi-save"
     class="p-button-rounded p-button-outlined"
     @click="createDownload(download)"
   />

@@ -59,7 +59,7 @@ import { useContentStore } from '../../store';
 import draggable from 'vuedraggable';
 import Checkbox from 'primevue/checkbox';
 
-const excludeKeys: (keyof SectionPart)[] = ['active', 'id', 'paragraphs'];
+const excludeKeys: (keyof SectionPart)[] = ['active', 'id'];
 const isHeading = ([key, value]: [string, unknown]) =>
   !excludeKeys.includes(key as keyof SectionPart) && typeof value === 'string';
 

@@ -20,5 +20,5 @@ export interface SectionPart {
   caption?: string;
   subtitle?: string;
   href?: `https://${string}`;
-  paragraphs?: string[];
+  text?: string;
 }

@@ -89,6 +89,11 @@ body {
   width: 100vw;
 }
 
+// fix inner transition
+.list-move .list-move {
+  transition: none !important;
+}
+
 .list-move,
 .list-enter-active,
 .list-leave-active {

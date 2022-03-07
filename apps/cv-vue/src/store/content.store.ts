@@ -36,6 +36,7 @@ export const useContentStore = defineStore('content', {
       },
     },
   }),
+
   getters: {
     download: state => {
       const { contactInfo, skills, content, style } = state;
@@ -45,7 +46,12 @@ export const useContentStore = defineStore('content', {
       )}`;
     },
     hasContent: state => !!state.content.sections?.length,
+    activeSections: state =>
+      state.content.sections
+        .filter(s => s.active)
+        .map(s => ({ ...s, parts: s.parts.filter(p => p.active) })),
   },
+
   actions: {
     addPart(section: Section, part: Omit<SectionPart, 'id'>) {
       const id = uuid();
