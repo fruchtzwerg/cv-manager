@@ -38,10 +38,7 @@
 
     <div
       id="print-bg"
-      :style="{
-        width: `${width}px`,
-        background: style.sidebar.background,
-      }"
+      :style="{ width: `${width}px` }"
       class="print-only"
     ></div>
   </aside>
@@ -108,6 +105,7 @@ export default defineComponent({
 <style scoped lang="scss">
 aside {
   background-color: var(--aside-background);
+  z-index: 0;
 
   padding: 0 1rem;
   height: 100%;
@@ -120,6 +118,7 @@ aside {
   left: 0;
   bottom: 0;
   z-index: -1;
+  background-color: var(--aside-background);
 }
 
 @media print {
