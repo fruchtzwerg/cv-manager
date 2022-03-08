@@ -27,7 +27,14 @@
           "productionSourceMap": true,
           "css": {
             "extract": true,
-            "sourceMap": false
+            "sourceMap": false,
+            "loaderOptions": {
+              "sass": {
+                "sassOptions": {
+                  "includePaths": ["./node_modules"]
+                }
+              }
+            }
           }
         }
       }
