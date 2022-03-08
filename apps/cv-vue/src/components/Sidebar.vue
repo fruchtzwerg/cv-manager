@@ -36,7 +36,6 @@ export default defineComponent({
 .sidebar {
   display: flex;
   flex-direction: column;
-  background: white;
 }
 
 .scrollable {

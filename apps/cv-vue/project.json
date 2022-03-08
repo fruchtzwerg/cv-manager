@@ -9,7 +9,16 @@
         "dest": "dist/apps/cv-vue",
         "index": "apps/cv-vue/public/index.html",
         "main": "apps/cv-vue/src/main.ts",
-        "tsConfig": "apps/cv-vue/tsconfig.app.json"
+        "tsConfig": "apps/cv-vue/tsconfig.app.json",
+        "css": {
+          "loaderOptions": {
+            "sass": {
+              "sassOptions": {
+                "includePaths": ["./node_modules"]
+              }
+            }
+          }
+        }
       },
       "configurations": {
         "production": {

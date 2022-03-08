@@ -35,10 +35,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@material/elevation' as mat;
+
 #preview {
   $A4-width: 21cm;
   width: $A4-width;
   min-width: $A4-width;
+
+  @media screen {
+    @include mat.elevation(4);
+  }
 }
 
 #sidebar {
@@ -91,6 +97,7 @@ export default defineComponent({
 
 body {
   margin: 0;
+  background-color: var(--gray-200);
 }
 
 #app {
@@ -100,9 +107,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 
-  display: flex;
-
-  width: 100vw;
+  @media screen {
+    display: flex;
+    justify-content: center;
+    margin-right: var(--sidebar-width);
+  }
 }
 
 // fix inner transition

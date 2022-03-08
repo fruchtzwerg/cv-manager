@@ -15,6 +15,7 @@
         width: `${width}px`,
         background: style.sidebar.background,
       }"
+      class="print-only"
     ></div>
   </aside>
 </template>

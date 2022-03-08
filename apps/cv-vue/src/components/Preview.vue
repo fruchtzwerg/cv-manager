@@ -48,6 +48,7 @@ export default defineComponent({
 .container {
   display: flex;
   position: relative;
+  background-color: white;
 }
 
 #content {
