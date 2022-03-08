@@ -10,7 +10,7 @@
       <template #item="{ element: section }">
         <li class="item section">
           <h3>
-            <div>{{ section.heading ?? '---' }}</div>
+            <div class="ellipsis">{{ section.heading ?? '---' }}</div>
             <Button
               icon="pi pi-trash"
               class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
@@ -32,7 +32,7 @@
                   alt="Grab here to move this element."
                   :draggable="false"
                 />
-                <div>{{ getHeading(part) }}</div>
+                <div class="ellipsis">{{ getHeading(part) }}</div>
                 <Button
                   icon="pi pi-trash"
                   class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"

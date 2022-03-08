@@ -135,4 +135,10 @@ body {
     font-size: 2rem;
   }
 }
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 </style>
