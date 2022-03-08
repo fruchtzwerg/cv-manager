@@ -60,6 +60,8 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
+@import './styles/cv-aside.scss';
+
 :root {
   --sidebar-width: 20rem;
 }
@@ -83,15 +85,15 @@ export default defineComponent({
   }
 }
 
-.screen-only.screen-only {
+.screen-only {
   @media print {
-    display: none;
+    display: none !important;
   }
 }
 
-.print-only.print-only {
+.print-only {
   @media screen {
-    display: none;
+    display: none !important;
   }
 }
 

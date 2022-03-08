@@ -11,7 +11,7 @@
     <div class="actions">
       <Button
         icon="pi pi-times"
-        class="p-button-rounded p-button-raised"
+        class="p-button-rounded p-button-outlined"
         @click="$emit('discard')"
       ></Button>
       <Button

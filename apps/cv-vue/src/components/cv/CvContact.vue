@@ -1,17 +1,20 @@
 <template>
-  <h1>Contact</h1>
-  <section class="contact">
-    <template v-for="(value, key) in info" :key="key">
+  <h1 class="aside-heading">{{ heading }}</h1>
+  <section class="contact aside-text">
+    <template v-for="(value, key) in records" :key="key">
       <template v-if="value">
         <div v-if="Array.isArray(value)" class="multiline">
-          <img :src="`/icons/material/${key}.svg`" />
+          <img :src="icons[key]" />
+
           <template v-for="substring in value" :key="substring">
-            <span>{{ substring }}</span
-            ><br />
+            <span>{{ substring }}</span>
+            <br />
           </template>
         </div>
-        <div v-else class="line">
-          <img :src="`/icons/material/${key}.svg`" />
+
+        <div v-else class="line" :class="{}">
+          <img :src="icons[key as keyof typeof icons]" />
+
           <a v-if="key === 'mail'" :href="`mailto:${value}`">{{ value }}</a>
           <a v-else-if="key === 'phone'" :href="`tel:${value}`">{{ value }}</a>
           <a
@@ -29,17 +32,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+
+import { ContactInfo } from '../../models/contact-info.model';
+import { icons } from '../../constants/icons.const';
 
 export default defineComponent({
   name: 'CvContact',
   props: {
-    info: Object,
+    heading: String,
+    records: Object as PropType<ContactInfo['records']>,
+  },
+  setup() {
+    return { icons };
   },
 });
 </script>
 
 <style scoped lang="scss">
+h1 {
+  font-size: var(--aside-heading-font-size);
+}
+
 .contact {
   text-align: start;
 
@@ -48,29 +62,9 @@ export default defineComponent({
     text-decoration: none;
     color: inherit;
   }
+}
 
-  .line {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-  }
-
-  .multiline {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      'icon street'
-      'empty city';
-    align-items: center;
-    column-gap: 0.5em;
-    row-gap: 0.15em;
-  }
-
-  .line,
-  .multiline {
-    img {
-      height: 1em;
-    }
-  }
+.icon-placeholder {
+  width: 1em;
 }
 </style>

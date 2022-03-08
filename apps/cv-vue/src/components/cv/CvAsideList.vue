@@ -1,6 +1,6 @@
 <template>
-  <h2>{{ list?.heading }}</h2>
-  <ul>
+  <h2 class="aside-heading">{{ list?.heading }}</h2>
+  <ul class="aside-text aside-list">
     <li v-for="value in list?.entries" :key="value">{{ value }}</li>
   </ul>
 </template>
@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-ul {
-  padding-left: 1.5rem;
+h2 {
+  font-size: var(--aside-heading-font-size);
 }
 </style>

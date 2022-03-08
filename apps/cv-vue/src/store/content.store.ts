@@ -4,13 +4,8 @@ import { v4 as uuid } from 'uuid';
 import { CSSProperties } from 'vue';
 import { SectionNotFoundError } from '../utils/section-not-found.error';
 import { PartNotFoundError } from '../utils/part-not-found.error';
-
-type Icon = 'web' | 'mail' | 'phone' | 'address';
-
-interface Skill {
-  heading: string;
-  entries: string[];
-}
+import { Skill } from '../models/skill.model';
+import { ContactInfo } from '../models/contact-info.model';
 
 interface Content {
   sections: Section[];
@@ -19,7 +14,7 @@ interface Content {
 type Style = 'sidebar';
 
 interface ContentState {
-  contactInfo: Partial<Record<Icon, string | string[]>>;
+  contactInfo: Partial<ContactInfo>;
   skills: Skill[];
   content: Content;
   style: Record<Style, CSSProperties>;
@@ -27,7 +22,9 @@ interface ContentState {
 
 export const useContentStore = defineStore('content', {
   state: (): ContentState => ({
-    contactInfo: {},
+    contactInfo: {
+      heading: 'Contact',
+    },
     skills: [],
     content: {
       sections: [],

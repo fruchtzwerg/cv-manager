@@ -1,0 +1,68 @@
+:root {
+  --aside-background: var(--indigo-900);
+  --aside-color: white;
+  --aside-font-family: Avenir, Helvetica, Arial, sans-serif;
+  --aside-font-size: 1em;
+  --aside-font-heading-weight: bold;
+  --aside-heading-font-size: 1.5em;
+}
+
+.aside-heading {
+  color: var(--aside-color);
+  font-size: var(--aside-heading-font-size);
+  font-weight: var(--aside-font-heading-weight);
+  font-family: var(--aside-font-family);
+  margin: 0.83em 0;
+
+  &::placeholder {
+    color: var(--aside-color);
+    opacity: 0.66;
+  }
+}
+
+.aside-text {
+  color: var(--aside-color);
+  font-size: var(--aside-font-size);
+  font-family: var(--aside-font-family);
+
+  &::placeholder {
+    color: var(--aside-color);
+    opacity: 0.66;
+  }
+}
+
+ul.aside-list {
+  padding-left: 1.5rem;
+}
+
+.contact {
+  .multiline {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'icon street'
+      'empty city';
+    align-items: center;
+    column-gap: 0.5em;
+    row-gap: 0.15em;
+  }
+
+  .line,
+  .multiline {
+    img {
+      height: 1em;
+    }
+  }
+
+  .line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+}
+
+aside .editor .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

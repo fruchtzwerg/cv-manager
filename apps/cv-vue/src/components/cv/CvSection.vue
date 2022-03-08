@@ -1,33 +1,26 @@
 <template>
   <section :class="{ pagebreak: section.pagebreak && section.active }">
     <template v-if="section.heading">
-      <SectionEditor
-        v-if="modes.section === 'edit'"
-        v-bind="section"
-        ref="sectionEditor"
-        @save="(modes.section = 'read'), patchSection(section.id, $event)"
-        @discard="modes.section = 'read'"
-      ></SectionEditor>
+      <InlineControls
+        :id="section.id"
+        :pagebreak="section.pagebreak"
+        @update:pagebreak="patchSection(section.id, { pagebreak: $event })"
+      >
+        <template #editor="{ visible, close }">
+          <SectionEditor
+            v-if="visible"
+            v-bind="section"
+            @save="patchSection(section.id, $event), close()"
+            @discard="close"
+          ></SectionEditor>
+        </template>
 
-      <template v-else>
-        <InlineControls
-          class="controls"
-          :id="section.id"
-          :pagebreak="section.pagebreak"
-          @update:pagebreak="patchSection(section.id, { pagebreak: $event })"
-          @open:editor="showSectionEdit"
-          @mouseenter="hovers.section = true"
-          @mouseleave="hovers.section = false"
-          :style="{ opacity: hovers.section ? 1 : 0 }"
-        ></InlineControls>
-        <h1
-          class="section-heading"
-          @mouseenter="hovers.section = true"
-          @mouseleave="hovers.section = false"
-        >
-          {{ section.heading }}
-        </h1>
-      </template>
+        <template v-slot="{ visible }">
+          <h1 v-if="visible" class="section-heading">
+            {{ section.heading }}
+          </h1>
+        </template>
+      </InlineControls>
     </template>
 
     <!-- Parts -->
@@ -38,40 +31,27 @@
         class="part"
         :class="{ pagebreak: part.pagebreak && part.active }"
       >
-        <PartEditor
-          v-if="modes.parts.get(part.id) === 'edit'"
-          v-bind="part"
-          @save="
-            patchPart(part.id, section.id, $event),
-              modes.parts.set(part.id, 'read')
-          "
-          @discard="modes.parts.set(part.id, 'read')"
-        ></PartEditor>
+        <InlineControls :id="part.id" v-model:pagebreak="part.pagebreak">
+          <template #editor="{ visible, close }">
+            <PartEditor
+              v-if="visible"
+              v-bind="part"
+              @save="patchPart(part.id, section.id, $event), close()"
+              @discard="close"
+            ></PartEditor>
+          </template>
 
-        <template v-else>
-          <InlineControls
-            class="controls"
-            :id="part.id"
-            v-model:pagebreak="part.pagebreak"
-            @open:editor="modes.parts.set(part.id, 'edit')"
-            @mouseenter="hovers.parts.set(part.id, true)"
-            @mouseleave="hovers.parts.set(part.id, false)"
-            :style="{ opacity: hovers.parts.get(part.id) ? 1 : 0 }"
-          ></InlineControls>
-
-          <CvSectionPart
-            v-bind="part"
-            @mouseenter="hovers.parts.set(part.id, true)"
-            @mouseleave="hovers.parts.set(part.id, false)"
-          ></CvSectionPart>
-        </template>
+          <template v-slot="{ visible }">
+            <CvSectionPart v-if="visible" v-bind="part"></CvSectionPart>
+          </template>
+        </InlineControls>
       </div>
     </TransitionGroup>
   </section>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import CvSectionPart from './CvSectionPart.vue';
@@ -81,11 +61,14 @@ import InlineControls from '../controls/InlineControls.vue';
 
 import { useContentStore } from '../../store';
 
-type EditMode = 'edit' | 'read';
-
 export default defineComponent({
   name: 'CvSection',
-  components: { InlineControls, CvSectionPart, PartEditor, SectionEditor },
+  components: {
+    InlineControls,
+    CvSectionPart,
+    PartEditor,
+    SectionEditor,
+  },
   props: {
     id: String,
     styles: Object,
@@ -98,49 +81,16 @@ export default defineComponent({
       () => activeSections.value.find(s => s.id === props.id)!
     );
 
-    const sectionEditor = ref<typeof SectionEditor>();
-    const hovers = ref({
-      section: false,
-      parts: new Map(section.value.parts.map(part => [part.id, false])),
-    });
-    const modes = ref({
-      section: 'read' as EditMode,
-      parts: new Map<string, EditMode>(
-        section.value.parts.map(part => [part.id, 'read'])
-      ),
-    });
-
     const { patchSection, patchPart } = store;
-    const showSectionEdit = () => {
-      modes.value.section = 'edit';
-      nextTick(() => sectionEditor.value?.focus());
-    };
 
-    const refs = { sectionEditor, hovers, modes };
-    const methods = { patchSection, patchPart, showSectionEdit };
+    const methods = { patchSection, patchPart };
 
-    return { section, ...refs, ...methods };
+    return { section, ...methods };
   },
 });
 </script>
 
 <style scoped lang="scss">
-section {
-  position: relative;
-}
-
-input {
-  border: 0;
-  width: 100%;
-}
-
-.controls {
-  position: absolute;
-  right: 0;
-
-  transition: opacity 0.2s ease;
-}
-
 section,
 .part {
   background-color: white;
@@ -204,5 +154,6 @@ section,
   display: block;
   border: 0;
   width: 100%;
+  background: none;
 }
 </style>
