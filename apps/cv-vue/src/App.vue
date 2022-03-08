@@ -59,6 +59,18 @@ export default defineComponent({
 }
 
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; /*Firefox*/
+  }
+}
+
+@media print {
   .pagebreak {
     page-break-before: always;
     margin-top: 2rem !important;
