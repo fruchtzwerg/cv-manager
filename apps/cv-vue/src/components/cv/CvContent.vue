@@ -53,7 +53,10 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
-.section ~ .section {
+.section {
+  transition: margin-top 0.1s linear;
+}
+.section + .section {
   margin-top: 5rem;
 }
 </style>
