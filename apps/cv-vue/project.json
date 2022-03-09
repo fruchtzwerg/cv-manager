@@ -12,7 +12,7 @@
         "tsConfig": "apps/cv-vue/tsconfig.app.json",
         "css": {
           "loaderOptions": {
-            "sass": {
+            "scss": {
               "sassOptions": {
                 "includePaths": ["./node_modules"]
               }
@@ -29,7 +29,7 @@
             "extract": true,
             "sourceMap": false,
             "loaderOptions": {
-              "sass": {
+              "scss": {
                 "sassOptions": {
                   "includePaths": ["./node_modules"]
                 }

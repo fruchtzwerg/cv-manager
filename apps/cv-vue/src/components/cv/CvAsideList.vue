@@ -1,8 +1,9 @@
 <template>
   <h2 class="aside-heading">{{ list?.heading }}</h2>
-  <ul class="aside-text aside-list">
-    <li v-for="value in list?.entries" :key="value">{{ value }}</li>
-  </ul>
+
+  <TransitionGroup tag="ul" name="list" class="aside-text aside-list">
+    <li v-for="skill in list?.entries" :key="skill.id">{{ skill.value }}</li>
+  </TransitionGroup>
 </template>
 
 <script lang="ts">

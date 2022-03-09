@@ -1,7 +1,7 @@
-import { Skill } from '../models/skill.model';
+import { SkillSection } from '../models/skill.model';
 
 export class SkillNotFoundError extends Error {
-  constructor(id: Skill['id']) {
+  constructor(id: SkillSection['id']) {
     super(`No skill with id '${id}' found.`);
   }
 }

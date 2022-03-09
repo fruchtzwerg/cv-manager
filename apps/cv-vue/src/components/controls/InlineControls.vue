@@ -9,13 +9,14 @@
         <div class="button-wrapper">
           <Button
             icon="pi pi-pencil"
-            class="p-button-outlined"
+            class="p-button-outlined button-sm"
             @click="(showEditor = true), $emit('open:editor', id)"
           />
         </div>
         <ToggleButton
           :binary="true"
           :model-value="pagebreak"
+          class="button-sm"
           @update:model-value="$emit('update:pagebreak', $event)"
           on-icon="icon icon-pb-on"
           off-icon="icon icon-pb"
@@ -59,6 +60,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@use '../../styles/controls.scss';
+
 .container {
   position: relative;
 }

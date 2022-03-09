@@ -1,8 +1,7 @@
 <template>
   <div class="manager">
-    <!-- Sections -->
     <draggable
-      v-model="content.sections"
+      v-model="skills"
       tag="ol"
       item-key="id"
       :component-data="{ class: 'list' }"
@@ -20,38 +19,24 @@
           </h3>
 
           <draggable
-            v-model="section.parts"
+            v-model="section.entries"
             tag="ol"
             item-key="id"
             :component-data="{ class: 'list' }"
           >
-            <template #item="{ element: part }">
-              <li class="item part">
+            <template #item="{ element: skill }">
+              <div class="item part">
                 <i class="pi pi-bars"></i>
-                <div class="ellipsis">{{ getHeading(part) }}</div>
+                <div class="ellipsis">{{ skill.value }}</div>
                 <Button
                   icon="pi pi-trash"
                   class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
-                  @click="confirmDeletePart(part, section.id)"
+                  @click="confirmDeleteSkill(skill, section.id)"
                 ></Button>
-                <Checkbox v-model="part.active" :binary="true"></Checkbox>
-              </li>
+                <Checkbox v-model="skill.active" :binary="true"></Checkbox>
+              </div>
             </template>
           </draggable>
-
-          <Button
-            class="p-button-text p-button-rounded add-btn"
-            label="Add paragraph"
-            icon="pi pi-plus"
-            @click="
-              addPart(section, {
-                active: true,
-                pagebreak: false,
-                heading: (section.parts.length + 1).toString(),
-              })
-            "
-          >
-          </Button>
         </li>
       </template>
     </draggable>
@@ -61,16 +46,13 @@
       label="Add section"
       icon="pi pi-plus"
       @click="
-        addSection({
+        addSkillSection({
           active: true,
-          pagebreak: false,
-          heading: (content.sections.length + 1).toString(),
+          heading: (skills.length + 1).toString(),
         })
       "
     >
     </Button>
-
-    <ConfirmDialog></ConfirmDialog>
   </div>
 </template>
 
@@ -78,38 +60,29 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
-import { useConfrimDelete } from '../../utils/confirm-delete.dialog';
-import { useContentStore } from '../../store';
-
 import draggable from 'vuedraggable';
 import Button from 'primevue/button';
 import Checkbox from 'primevue/checkbox';
-import ConfirmDialog from 'primevue/confirmdialog';
 
-import { getHeading } from '../../utils/get-heading.util';
+import { useConfrimDelete } from '../../utils/confirm-delete.dialog';
+import { useContentStore } from '../../store';
 
 export default defineComponent({
-  name: 'ContentManager',
-  components: { draggable, Button, Checkbox, ConfirmDialog },
+  name: 'SidebarManager',
+  components: { draggable, Button, Checkbox },
   setup() {
     const store = useContentStore();
-    const { addPart, removePart, addSection, removeSection } = store;
-    const { content } = storeToRefs(store);
+    const { skills } = storeToRefs(store);
+    const { addSkillSection, removeSkillSection, removeSkill } = store;
 
-    const confirmDeleteSection = useConfrimDelete(removeSection);
-    const confirmDeletePart = useConfrimDelete(removePart);
-
-    const actions = {
-      addPart,
-      confirmDeletePart,
-      addSection,
-      confirmDeleteSection,
-    };
+    const confirmDeleteSection = useConfrimDelete(removeSkillSection);
+    const confirmDeleteSkill = useConfrimDelete(removeSkill);
 
     return {
-      content,
-      getHeading,
-      ...actions,
+      skills,
+      addSkillSection,
+      confirmDeleteSection,
+      confirmDeleteSkill,
     };
   },
 });

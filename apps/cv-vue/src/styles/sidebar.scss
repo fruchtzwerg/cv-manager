@@ -1,0 +1,9 @@
+@use './variables' as vars;
+
+:root {
+  --sidebar-width: 20rem;
+  --sidebar-margin: #{vars.$radius};
+  --sidebar-offset-width: calc(
+    var(--sidebar-width) + var(--sidebar-margin) * 2
+  );
+}

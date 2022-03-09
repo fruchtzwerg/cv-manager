@@ -12,6 +12,7 @@
             v-bind="section"
             @save="patchSection(section.id, $event), close()"
             @discard="close"
+            class="section-heading first"
           ></SectionEditor>
         </template>
 
@@ -112,50 +113,6 @@ section,
 .caption,
 .subtitle {
   margin: 0.25rem 0;
-}
-
-.section-heading {
-  font-size: 2.25rem;
-
-  &.first {
-    @media screen {
-      margin-top: calc(24px * 0.83);
-    }
-  }
-}
-
-.heading {
-  font-size: 1.65rem;
-  text-decoration: underline;
-  font-weight: 900;
-  color: var(--indigo-700);
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--indigo-700);
-}
-
-.caption {
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: var(--indigo-900);
-}
-
-.subtitle {
-  color: var(--indigo-400);
-}
-
-.href {
-  color: var(--indigo-400);
-  font-size: 0.85rem;
-}
-
-.text {
-  color: black;
-  font-family: Quicksand;
-  text-align: justify;
 }
 
 .editor input {

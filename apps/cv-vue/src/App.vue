@@ -42,11 +42,16 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@material/elevation' as mat;
 
+$margin: 1rem;
+
 #toolbar {
   position: fixed;
-  top: 0;
+  top: $margin;
+  left: $margin;
+  right: $margin;
   height: 4rem;
-  width: 100vw;
+  overflow: hidden;
+  border-radius: $margin;
   background-color: white;
   z-index: 999;
 
@@ -67,20 +72,20 @@ export default defineComponent({
 }
 
 #sidebar {
+  $margin-y: 7rem;
+
   position: fixed;
-  top: 7rem;
-  bottom: 3.75rem;
-  right: 0;
+  top: $margin-y;
+  bottom: $margin-y;
+  right: $margin;
   transition: width 0.5s ease-out;
 }
 </style>
 
 <style lang="scss">
-@import './styles/cv-aside.scss';
-
-:root {
-  --sidebar-width: 20rem;
-}
+@use './styles/cv-aside.scss';
+@use './styles/cv-content.scss';
+@use './styles/sidebar.scss';
 
 @media print {
   @page {
@@ -128,7 +133,7 @@ body {
 
   @media screen {
     display: block;
-    margin-right: var(--sidebar-width);
+    margin-right: var(--sidebar-offset-width);
   }
 }
 

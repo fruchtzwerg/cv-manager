@@ -18,22 +18,24 @@
       </template>
     </InlineControls>
 
-    <template v-for="list in skills" :key="list.id">
-      <InlineControls>
-        <template #editor="{ visible, close }">
-          <SkillEditor
-            v-bind="list"
-            v-if="visible"
-            @save="saveSkills(list.id, $event), close()"
-            @discard="close"
-          ></SkillEditor
-        ></template>
+    <TransitionGroup name="list">
+      <template v-for="list in activeSkills" :key="list.id">
+        <InlineControls>
+          <template #editor="{ visible, close }">
+            <SkillEditor
+              v-bind="list"
+              v-if="visible"
+              @save="patchSkillSection(list.id, $event), close()"
+              @discard="close"
+            ></SkillEditor
+          ></template>
 
-        <template v-slot="{ visible }">
-          <CvAsideList v-if="visible" :list="list"></CvAsideList>
-        </template>
-      </InlineControls>
-    </template>
+          <template v-slot="{ visible }">
+            <CvAsideList v-if="visible" :list="list"></CvAsideList>
+          </template>
+        </InlineControls>
+      </template>
+    </TransitionGroup>
 
     <div
       id="print-bg"
@@ -50,7 +52,7 @@ import { useElementBounding } from '@vueuse/core';
 
 import { SkillNotFoundError } from '../../utils/skill-not-found.error';
 import { ContactInfo } from '../../models/contact-info.model';
-import { Skill } from '../../models/skill.model';
+import { SkillSection } from '../../models/skill.model';
 import { useContentStore } from '../../store';
 
 import CvContact from './CvContact.vue';
@@ -72,19 +74,11 @@ export default defineComponent({
     const aside = ref<HTMLElement>();
     const store = useContentStore();
 
-    const { style, contactInfo, skills } = storeToRefs(store);
+    const { patchSkillSection } = store;
+    const { style, contactInfo, activeSkills } = storeToRefs(store);
 
     const saveContact = (contactInfo: ContactInfo) =>
       store.$patch({ contactInfo });
-
-    const saveSkills = (id: Skill['id'], skill: Omit<Skill, 'id'>) => {
-      store.$patch(state => {
-        const index = state.skills.findIndex(s => s.id === id);
-        if (index < 0) throw new SkillNotFoundError(id);
-
-        state.skills.splice(index, 1, { id, ...skill });
-      });
-    };
 
     const { width } = useElementBounding(aside);
 
@@ -92,8 +86,8 @@ export default defineComponent({
       style,
       contactInfo,
       saveContact,
-      saveSkills,
-      skills,
+      patchSkillSection,
+      activeSkills,
       aside,
       width,
     };
