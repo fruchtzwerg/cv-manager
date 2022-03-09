@@ -16,7 +16,11 @@
         </template>
 
         <template v-slot="{ visible }">
-          <h1 v-if="visible" class="section-heading">
+          <h1
+            v-if="visible"
+            class="section-heading"
+            :class="{ first: section.id === first.id }"
+          >
             {{ section.heading }}
           </h1>
         </template>
@@ -81,11 +85,13 @@ export default defineComponent({
       () => activeSections.value.find(s => s.id === props.id)!
     );
 
+    const first = computed(() => activeSections.value[0]);
+
     const { patchSection, patchPart } = store;
 
     const methods = { patchSection, patchPart };
 
-    return { section, ...methods };
+    return { section, first, ...methods };
   },
 });
 </script>
@@ -111,8 +117,10 @@ section,
 .section-heading {
   font-size: 2.25rem;
 
-  &:first-of-type {
-    margin-top: calc(24px * 0.83);
+  &.first {
+    @media screen {
+      margin-top: calc(24px * 0.83);
+    }
   }
 }
 
