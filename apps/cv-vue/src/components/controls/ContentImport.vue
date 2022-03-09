@@ -8,7 +8,7 @@
   <Button
     label="Load"
     icon="pi pi-download"
-    class="p-button-rounded p-button-outlined"
+    class="p-button-text toolbar-item"
     @click="file.click()"
   />
 </template>

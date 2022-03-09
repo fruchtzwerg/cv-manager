@@ -1,7 +1,8 @@
 <template>
   <Button
     icon="pi pi-print"
-    class="p-button-rounded fab"
+    :label="fab ? undefined : 'Print'"
+    :class="{ 'toolbar-item': !fab, 'p-button-rounded': fab, fab }"
     :disabled="!hasContent"
     @click="print()"
   />
@@ -17,6 +18,9 @@ import { storeToRefs } from 'pinia';
 export default defineComponent({
   name: 'ContentPrint',
   components: { Button },
+  props: {
+    fab: Boolean,
+  },
   setup() {
     const store = useContentStore();
     const { hasContent } = storeToRefs(store);
@@ -28,4 +32,15 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@use '@material/elevation' as mat;
+
+.fab {
+  $size: 3rem;
+
+  height: $size;
+  width: $size;
+
+  @include mat.elevation($z-value: 3, $opacity-boost: 0.25);
+}
+</style>

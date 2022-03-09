@@ -7,9 +7,9 @@
       item-key="id"
       :component-data="{ class: 'list' }"
     >
-      <template #item="{ element: section }">
+      <template #item="{ element: section, index }">
         <li class="item section">
-          <h3>
+          <h3 :class="{ first: !index }">
             <div class="ellipsis">{{ section.heading ?? '---' }}</div>
             <Button
               icon="pi pi-trash"
@@ -154,7 +154,7 @@ export default defineComponent({
 .manager {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .list {
@@ -179,6 +179,10 @@ export default defineComponent({
       display: flex;
       align-items: center;
       gap: 0.5rem;
+
+      &.first {
+        margin-top: 0;
+      }
     }
   }
 

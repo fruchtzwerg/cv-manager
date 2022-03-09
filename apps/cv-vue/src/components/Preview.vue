@@ -51,6 +51,12 @@ export default defineComponent({
   background-color: white;
 }
 
+.print {
+  position: fixed;
+  bottom: 4rem;
+  left: calc((100vw - var(--sidebar-width)) / 2 + 10.5cm - 3rem);
+}
+
 #content {
   width: 100%;
 }
@@ -68,7 +74,7 @@ export default defineComponent({
   left: 0;
   right: 0;
   background: repeat-y url('../assets/page.svg');
-  z-index: 999;
+  z-index: 99;
   pointer-events: none;
 
   @media print {

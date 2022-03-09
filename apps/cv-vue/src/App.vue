@@ -1,7 +1,10 @@
 <template>
+  <Toolbar id="toolbar" class="screen-only"></Toolbar>
+
   <Preview id="preview"></Preview>
   <Sidebar
     id="sidebar"
+    class="screen-only"
     :style="{ width: sidebar.open ? 'var(--sidebar-width)' : 0 }"
   ></Sidebar>
 </template>
@@ -15,12 +18,14 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { useStore } from './store/main.store';
 
+import Toolbar from './components/Toolbar.vue';
 import Preview from './components/Preview.vue';
 import Sidebar from './components/Sidebar.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
+    Toolbar,
     Preview,
     Sidebar,
   },
@@ -37,25 +42,36 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@material/elevation' as mat;
 
+#toolbar {
+  position: fixed;
+  top: 0;
+  height: 4rem;
+  width: 100vw;
+  background-color: white;
+  z-index: 999;
+
+  @include mat.elevation(6);
+}
+
 #preview {
   $A4-width: 21cm;
   width: $A4-width;
   min-width: $A4-width;
 
   @media screen {
+    margin: 7rem auto;
+    border-radius: 1rem;
+    overflow: hidden;
     @include mat.elevation(4);
   }
 }
 
 #sidebar {
   position: fixed;
-  top: 0;
-  bottom: 0;
+  top: 7rem;
+  bottom: 3.75rem;
   right: 0;
   transition: width 0.5s ease-out;
-
-  height: 100vh;
-  max-height: 100vh;
 }
 </style>
 
@@ -107,11 +123,11 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+
+  color: var(--bluegray-800);
 
   @media screen {
-    display: flex;
-    justify-content: center;
+    display: block;
     margin-right: var(--sidebar-width);
   }
 }

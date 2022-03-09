@@ -120,27 +120,27 @@ section,
   font-size: 1.65rem;
   text-decoration: underline;
   font-weight: 900;
-  color: #a91a20;
+  color: var(--indigo-700);
 }
 
 .title {
   font-size: 1.5rem;
-  font-weight: 200;
-  color: #c51f26;
+  font-weight: 300;
+  color: var(--indigo-700);
 }
 
 .caption {
   font-size: 0.75rem;
   font-weight: 400;
-  color: #8d161b;
+  color: var(--indigo-900);
 }
 
 .subtitle {
-  color: #e1232b;
+  color: var(--indigo-400);
 }
 
 .href {
-  color: #e1232b;
+  color: var(--indigo-400);
   font-size: 0.85rem;
 }
 

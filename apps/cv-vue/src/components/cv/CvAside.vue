@@ -1,9 +1,8 @@
 <template>
-  <!-- <aside
-    :style="{ ...style.sidebar, minWidth: style.sidebar.width }"
+  <aside
     ref="aside"
-  > -->
-  <aside ref="aside">
+    :style="{ width: style.sidebar.width, minWidth: style.sidebar.width }"
+  >
     <InlineControls :id="'contact'">
       <template #editor="{ visible, close }">
         <ContactEditor
@@ -108,7 +107,6 @@ aside {
   z-index: 0;
 
   padding: 0 1rem;
-  height: 100%;
   min-height: 100vh;
 }
 
