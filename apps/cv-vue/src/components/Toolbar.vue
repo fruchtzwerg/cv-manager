@@ -3,6 +3,7 @@
     <div class="actions">
       <ContentImport></ContentImport>
       <ContentDownload></ContentDownload>
+      <ContentClear></ContentClear>
     </div>
 
     <ContentPrint></ContentPrint>
@@ -15,6 +16,7 @@ import { defineComponent } from 'vue';
 import ContentDownload from './controls/ContentDownload.vue';
 import ContentImport from './controls/ContentImport.vue';
 import ContentPrint from './controls/ContentPrint.vue';
+import ContentClear from './controls/ContentClear.vue';
 
 export default defineComponent({
   name: 'Toolbar',
@@ -22,6 +24,7 @@ export default defineComponent({
     ContentDownload,
     ContentImport,
     ContentPrint,
+    ContentClear,
   },
 });
 </script>
