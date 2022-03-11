@@ -7,8 +7,13 @@
       @keyup.enter="$emit('save', cloneDeep(model))"
     />
 
-    <div v-for="(record, key) in filtered.info" :key="record" class="line">
-      <img :src="icons[key as keyof typeof icons]" />
+    <div
+      v-for="(record, key) in filtered.info"
+      :key="record"
+      class="line aside-text"
+    >
+      <component :is="icons[key]"></component>
+
       <input
         v-model="model.records[key]"
         :placeholder="capitalize(key)"
@@ -17,8 +22,9 @@
       />
     </div>
 
-    <div class="multiline">
-      <img :src="icons.address" />
+    <div class="multiline aside-text">
+      <component :is="icons.address"></component>
+
       <template v-for="(record, i) in filtered.address" :key="record">
         <input
           v-model="model.records.address[i]"
@@ -58,7 +64,7 @@ import { icons } from '../../constants/icons.const';
 
 export default defineComponent({
   name: 'ContactEditor',
-  components: { Button },
+  components: { Button, ...(Object.values(icons) as any) },
   props: {
     heading: String,
     records: {

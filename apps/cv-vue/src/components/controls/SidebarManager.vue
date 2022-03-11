@@ -64,7 +64,7 @@ import draggable from 'vuedraggable';
 import Button from 'primevue/button';
 import Checkbox from 'primevue/checkbox';
 
-import { useConfrimDelete } from '../../utils/confirm-delete.dialog';
+import { useConfrimDelete } from '../../plugins/confirm-delete.plugin';
 import { useContentStore } from '../../store';
 
 export default defineComponent({

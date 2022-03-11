@@ -3,50 +3,44 @@
     class="tabview-custom sidebar screen-only"
     v-model:active-index="sidebar.active"
   >
-    <TabPanel>
+    <TabPanel v-for="tab in tabs" :key="tab.label">
       <template #header>
-        <img class="tab-icon" src="../assets/aside.svg" />
-        <span>Sidebar</span>
+        <component
+          :class="{ 'tab-icon': tab.label }"
+          :is="tab.icon"
+        ></component>
+
+        <span v-if="tab.label">{{ tab.label }}</span>
       </template>
 
-      <SidebarManager></SidebarManager>
-    </TabPanel>
-
-    <TabPanel>
-      <template #header>
-        <img class="tab-icon" src="../assets/text.svg" />
-        <span>Content</span>
-      </template>
-
-      <ContentManager></ContentManager>
+      <component :is="tab.component"></component>
     </TabPanel>
   </TabView>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
 
 import TabPanel from 'primevue/tabpanel';
 import TabView from 'primevue/tabview';
 
-import SidebarManager from './controls/SidebarManager.vue';
-import ContentManager from './controls/ContentManager.vue';
+import { tabs } from '../constants/tabs.const';
 import { useStore } from '../store';
-import { storeToRefs } from 'pinia';
 
 export default defineComponent({
   name: 'Sidebar',
   components: {
     TabPanel,
     TabView,
-    SidebarManager,
-    ContentManager,
+    ...(tabs.map(tab => tab.component) as any),
+    ...(tabs.map(tab => tab.icon) as any),
   },
   setup() {
     const store = useStore();
     const { sidebar } = storeToRefs(store);
 
-    return { sidebar };
+    return { sidebar, tabs };
   },
 });
 </script>

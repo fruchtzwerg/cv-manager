@@ -1,7 +1,7 @@
 import { App, inject } from 'vue';
 import ConfirmEventBus from 'primevue/confirmationeventbus';
 import { ConfirmationOptions as Options } from 'primevue/confirmationoptions';
-import { getHeading, StateEntry } from './get-heading.util';
+import { getHeading, StateEntry } from '../utils/get-heading.util';
 import { Entry } from '../models/entry.model';
 
 type ConfirmationOptions = Options & {
@@ -12,9 +12,6 @@ type AcceptFnSelf = (id: string) => void;
 type AcceptParentFn = (id: string, parentId: string) => void;
 
 type AcceptFn = AcceptFnSelf | AcceptParentFn;
-
-const isFnSelf = (fn: AcceptFn, parentId?: string): fn is AcceptFnSelf =>
-  parentId == null;
 
 export const ConfirmSymbol = Symbol();
 
@@ -52,7 +49,7 @@ class DeleteConfirmationService {
   }
 }
 
-export const plugin = {
+export const ConfirmDeleteDialogPlugin = {
   install: (app: App) => {
     const Confirm = DeleteConfirmationService.confirm;
 

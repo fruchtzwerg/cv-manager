@@ -83,6 +83,7 @@ $margin: 1rem;
 </style>
 
 <style lang="scss">
+@use './styles/colors.scss';
 @use './styles/cv-aside.scss';
 @use './styles/cv-content.scss';
 @use './styles/sidebar.scss';

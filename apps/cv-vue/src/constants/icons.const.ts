@@ -1,8 +1,14 @@
+import { Component } from 'vue';
 import { Icon } from '../models/contact-info.model';
 
-export const icons: Record<Icon, string> = {
-  mail: '/icons/material/mail.svg',
-  phone: '/icons/material/phone.svg',
-  address: '/icons/material/address.svg',
-  web: '/icons/material/web.svg',
+import MailIcon from '../components/icons/MailIcon.vue';
+import PhoneIcon from '../components/icons/PhoneIcon.vue';
+import AddressIcon from '../components/icons/AddressIcon.vue';
+import WebIcon from '../components/icons/WebIcon.vue';
+
+export const icons: Record<Icon, Component> = {
+  mail: MailIcon,
+  phone: PhoneIcon,
+  address: AddressIcon,
+  web: WebIcon,
 };

@@ -23,7 +23,7 @@
   font-size: 1.65rem;
   text-decoration: underline;
   font-weight: 900;
-  color: var(--indigo-700);
+  color: var(--heading-color, --indigo-700);
 
   @include font-family();
 }
@@ -31,7 +31,7 @@
 .title {
   font-size: 1.5rem;
   font-weight: 300;
-  color: var(--indigo-700);
+  color: var(--title-color, --indigo-700);
 
   @include font-family();
 }
@@ -39,20 +39,20 @@
 .caption {
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--indigo-900);
+  color: var(--caption-color, --indigo-900);
 
   @include font-family();
 }
 
 .subtitle {
   font-weight: 700;
-  color: var(--indigo-400);
+  color: var(--subtitle-color, --indigo-400);
 
   @include font-family();
 }
 
 .href {
-  color: var(--indigo-400);
+  color: var(--href-color, --indigo-400);
   font-size: 0.85rem;
   text-decoration: underline;
 

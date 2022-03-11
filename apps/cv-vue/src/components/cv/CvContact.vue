@@ -4,7 +4,7 @@
     <template v-for="(value, key) in records" :key="key">
       <template v-if="value">
         <div v-if="Array.isArray(value)" class="multiline">
-          <img :src="icons[key]" />
+          <component :is="icons[key]"></component>
 
           <template v-for="substring in value" :key="substring">
             <span>{{ substring }}</span>
@@ -13,7 +13,7 @@
         </div>
 
         <div v-else class="line" :class="{}">
-          <img :src="icons[key as keyof typeof icons]" />
+          <component :is="icons[key]"></component>
 
           <a v-if="key === 'mail'" :href="`mailto:${value}`">{{ value }}</a>
           <a v-else-if="key === 'phone'" :href="`tel:${value}`">{{ value }}</a>
@@ -39,6 +39,9 @@ import { icons } from '../../constants/icons.const';
 
 export default defineComponent({
   name: 'CvContact',
+  components: {
+    ...(Object.values(icons) as any),
+  },
   props: {
     heading: String,
     records: Object as PropType<ContactInfo['records']>,
@@ -60,7 +63,7 @@ h1 {
   a,
   a:active {
     text-decoration: none;
-    color: inherit;
+    color: var(--primary-text-color);
   }
 }
 

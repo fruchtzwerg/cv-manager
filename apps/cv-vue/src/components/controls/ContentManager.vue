@@ -78,7 +78,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
-import { useConfrimDelete } from '../../utils/confirm-delete.dialog';
+import { useConfrimDelete } from '../../plugins/confirm-delete.plugin';
 import { useContentStore } from '../../store';
 
 import draggable from 'vuedraggable';

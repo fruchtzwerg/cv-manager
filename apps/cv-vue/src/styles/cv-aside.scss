@@ -1,6 +1,6 @@
 :root {
-  --aside-background: var(--indigo-900);
-  --aside-color: white;
+  --aside-background: var(--primary-color, --indigo-900);
+  --aside-color: var(--primary-text-color, white);
   --aside-font-family: Avenir, Helvetica, Arial, sans-serif;
   --aside-font-size: 1em;
   --aside-font-heading-weight: bold;

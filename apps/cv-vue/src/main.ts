@@ -4,16 +4,18 @@ import App from './App.vue';
 import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 
-import { pina } from './store';
+import { pinia } from './store';
 import pluginPersistance from 'pinia-plugin-persistedstate';
 
-import { plugin } from './utils/confirm-delete.dialog';
+import { ConfirmDeleteDialogPlugin } from './plugins/confirm-delete.plugin';
+import { ColorSync } from './plugins/color-sync.plugin';
 
-pina.use(pluginPersistance);
+pinia.use(pluginPersistance);
 
 createApp(App)
-  .use(pina)
+  .use(pinia)
   .use(PrimeVue)
   .use(ConfirmationService)
-  .use(plugin)
+  .use(ConfirmDeleteDialogPlugin)
+  .use(ColorSync)
   .mount('#app');

@@ -7,35 +7,55 @@ import { PartNotFoundError } from '../utils/part-not-found.error';
 import { Skill, SkillSection } from '../models/skill.model';
 import { ContactInfo } from '../models/contact-info.model';
 import { SkillNotFoundError } from '../utils/skill-not-found.error';
+import { cloneDeep, mapValues } from 'lodash-es';
+import { normalizeColor } from '../utils/normalize-color.util';
 
 interface Content {
   sections: Section[];
 }
 
-type Style = 'sidebar';
+type ComponentStyle = 'sidebar';
 
-interface ContentState {
+interface Style extends Record<ComponentStyle, CSSProperties> {
+  colors: Record<string, string>;
+}
+
+export interface ContentState {
   contactInfo: Partial<ContactInfo>;
   skills: SkillSection[];
   content: Content;
-  style: Record<Style, CSSProperties>;
+  style: Style;
 }
 
+const CONTENT_DEFAULT: ContentState = {
+  contactInfo: {
+    heading: 'Contact',
+    records: undefined,
+  },
+  skills: [],
+  content: {
+    sections: [],
+  },
+  style: {
+    colors: {
+      primary: 'var(--indigo-900)',
+      'primary-text': '#ffffff',
+      heading: 'var(--indigo-700)',
+      title: 'var(--indigo-700)',
+      caption: 'var(--indigo-900)',
+      subtitle: 'var(--indigo-400)',
+      href: 'var(--indigo-400)',
+    },
+    sidebar: {
+      width: 'min-content',
+    },
+  },
+};
+
+export const getContentDefault = () => cloneDeep(CONTENT_DEFAULT);
+
 export const useContentStore = defineStore('content', {
-  state: (): ContentState => ({
-    contactInfo: {
-      heading: 'Contact',
-    },
-    skills: [],
-    content: {
-      sections: [],
-    },
-    style: {
-      sidebar: {
-        width: 'min-content',
-      },
-    },
-  }),
+  state: (): ContentState => getContentDefault(),
 
   getters: {
     download: state => {
@@ -46,6 +66,12 @@ export const useContentStore = defineStore('content', {
       )}`;
     },
     hasContent: state => !!state.content.sections?.length,
+
+    colors: state => ({
+      hex: {
+        ...mapValues(state.style.colors, normalizeColor),
+      },
+    }),
 
     activeSkills: state =>
       state.skills
