@@ -43,7 +43,8 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
-.toolbar-item {
+.toolbar-item,
+.toolbar-item button {
   border-radius: 0;
 
   &:focus {
