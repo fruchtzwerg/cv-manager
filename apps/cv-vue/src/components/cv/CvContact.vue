@@ -29,7 +29,7 @@
           >
           <a
             v-else-if="key === 'web'"
-            :href="value"
+            :href="normalizeHref(value)"
             target="_blank"
             rel="noopener"
             class="ellipsis"
@@ -47,6 +47,7 @@ import { defineComponent, PropType } from 'vue';
 
 import { ContactInfo } from '../../models/contact-info.model';
 import { icons } from '../../constants/icons.const';
+import { normalizeHref } from '../../utils/normalize-href.util';
 
 export default defineComponent({
   name: 'CvContact',
@@ -58,7 +59,7 @@ export default defineComponent({
     records: Object as PropType<ContactInfo['records']>,
   },
   setup() {
-    return { icons };
+    return { icons, normalizeHref };
   },
 });
 </script>
