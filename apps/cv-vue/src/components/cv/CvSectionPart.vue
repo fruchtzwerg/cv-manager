@@ -5,7 +5,14 @@
     <h4 v-if="caption" class="caption">{{ caption }}</h4>
     <h5 v-if="subtitle" class="subtitle">{{ subtitle }}</h5>
 
-    <a :href="href" target="_blank" rel="noopener" class="href">{{ href }}</a>
+    <a
+      v-if="href"
+      :href="normalizeHref(href)"
+      target="_blank"
+      rel="noopener"
+      class="href"
+      >{{ href }}</a
+    >
 
     <div v-html="text" class="text"></div>
   </div>
@@ -13,6 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { normalizeHref } from '../../utils/normalize-href.util';
 
 export default defineComponent({
   name: 'CvSectionPart',
@@ -24,6 +32,7 @@ export default defineComponent({
     href: String,
     text: String,
   },
+  setup: () => ({ normalizeHref }),
 });
 </script>
 

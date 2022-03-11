@@ -4,7 +4,7 @@ export const example: ContentState = {
   contactInfo: {
     heading: 'Contact',
     records: {
-      web: 'https://jedipedia.fandom.com/wiki/Luke_Skywalker',
+      web: 'jedipedia.fandom.com/wiki/Luke_Skywalker',
       mail: 'luke@skywalker.tat',
       phone: '+1 326-3827',
       address: ['Java Street 42', 'Anchorhead'],
@@ -111,7 +111,7 @@ export const example: ContentState = {
             title: 'Champion',
             caption: 'Accuracy | Speed | Overall',
             subtitle: '3 years in a row',
-            href: 'https://womptastic.tat',
+            href: 'womptastic.tat',
             text: '<p>Incumbent champion in the following disciplines:</p><ul><li>Precision - most kills with 30 rounds</li><li>Speed - most kills in 30 seconds</li><li>Overall</li></ul>',
           },
           {
@@ -133,7 +133,7 @@ export const example: ContentState = {
             caption: 'X-34 Landspeeder',
             subtitle: '2 years',
             text: '<p>Experience with loading and delivering goods with the trusty X-34 Landspeeder in traitorous terrain.</p><p>Evasion of Tusken Raiders and Javas alike.</p><p>Defence of cargo during high speed desert persuits.</p>',
-            href: 'https://www.starwars.com/databank/x-34-landspeeder',
+            href: 'www.starwars.com/databank/x-34-landspeeder',
           },
         ],
       },

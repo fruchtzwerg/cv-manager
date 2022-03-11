@@ -19,6 +19,6 @@ export interface SectionPart {
   title?: string;
   caption?: string;
   subtitle?: string;
-  href?: `https://${string}`;
+  href?: string;
   text?: string;
 }
