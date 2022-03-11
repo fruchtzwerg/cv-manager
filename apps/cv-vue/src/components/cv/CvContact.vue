@@ -1,5 +1,5 @@
 <template>
-  <h1 class="aside-heading">{{ heading }}</h1>
+  <h1 class="aside-heading first">{{ heading }}</h1>
 
   <section class="contact aside-text">
     <template v-for="(value, key) in records" :key="key">

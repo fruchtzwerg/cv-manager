@@ -9,15 +9,22 @@
 }
 
 .aside-heading {
+  $margin: 0.86em;
+
   color: var(--aside-color);
   font-size: var(--aside-heading-font-size);
   font-weight: var(--aside-font-heading-weight);
   font-family: var(--aside-font-family);
-  margin: 0.83em 0;
+  margin: 1 + $margin 0 $margin;
 
   &::placeholder {
     color: var(--aside-color);
     opacity: 0.66;
+  }
+
+  &.first {
+    margin-top: $margin;
+    text-align: center;
   }
 }
 
@@ -33,7 +40,9 @@
 }
 
 ul.aside-list {
-  padding-left: 1.5rem;
+  list-style-position: inside;
+  padding-left: 1rem;
+  margin: 0;
 }
 
 .contact {
