@@ -1,18 +1,21 @@
 <template>
   <h1 class="aside-heading">{{ heading }}</h1>
+
   <section class="contact aside-text">
     <template v-for="(value, key) in records" :key="key">
-      <template v-if="value">
-        <div v-if="Array.isArray(value)" class="multiline">
+      <div v-if="Array.isArray(value)" class="multiline">
+        <template v-if="value[0]">
           <component :is="icons[key]"></component>
 
           <template v-for="substring in value" :key="substring">
             <span>{{ substring }}</span>
             <br />
           </template>
-        </div>
+        </template>
+      </div>
 
-        <div v-else class="line" :class="{}">
+      <div v-else class="line" :class="{}">
+        <template v-if="value">
           <component :is="icons[key]"></component>
 
           <a v-if="key === 'mail'" :href="`mailto:${value}`">{{ value }}</a>
@@ -25,8 +28,8 @@
             >{{ value }}</a
           >
           <span v-else>{{ value }}</span>
-        </div>
-      </template>
+        </template>
+      </div>
     </template>
   </section>
 </template>
