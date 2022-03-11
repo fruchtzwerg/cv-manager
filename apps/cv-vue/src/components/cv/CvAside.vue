@@ -50,9 +50,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent, ref } from 'vue';
 import { useElementBounding } from '@vueuse/core';
 
-import { SkillNotFoundError } from '../../utils/skill-not-found.error';
 import { ContactInfo } from '../../models/contact-info.model';
-import { SkillSection } from '../../models/skill.model';
 import { useContentStore } from '../../store';
 
 import CvContact from './CvContact.vue';

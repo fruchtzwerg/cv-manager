@@ -2,7 +2,9 @@
   <h2 class="aside-heading">{{ list?.heading }}</h2>
 
   <TransitionGroup tag="ul" name="list" class="aside-text aside-list">
-    <li v-for="skill in list?.entries" :key="skill.id">{{ skill.value }}</li>
+    <li v-for="skill in list?.entries" :key="skill.id" class="ellipsis">
+      {{ skill.value }}
+    </li>
   </TransitionGroup>
 </template>
 
@@ -20,5 +22,9 @@ export default defineComponent({
 <style scoped lang="scss">
 h2 {
   font-size: var(--aside-heading-font-size);
+}
+
+.ellipsis {
+  max-width: var(--aside-content-width);
 }
 </style>

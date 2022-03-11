@@ -8,7 +8,7 @@
           <component :is="icons[key]"></component>
 
           <template v-for="substring in value" :key="substring">
-            <span>{{ substring }}</span>
+            <span class="ellipsis">{{ substring }}</span>
             <br />
           </template>
         </template>
@@ -18,16 +18,24 @@
         <template v-if="value">
           <component :is="icons[key]"></component>
 
-          <a v-if="key === 'mail'" :href="`mailto:${value}`">{{ value }}</a>
-          <a v-else-if="key === 'phone'" :href="`tel:${value}`">{{ value }}</a>
+          <a v-if="key === 'mail'" :href="`mailto:${value}`" class="ellipsis">{{
+            value
+          }}</a>
+          <a
+            v-else-if="key === 'phone'"
+            :href="`tel:${value}`"
+            class="ellipsis"
+            >{{ value }}</a
+          >
           <a
             v-else-if="key === 'web'"
             :href="value"
             target="_blank"
             rel="noopener"
+            class="ellipsis"
             >{{ value }}</a
           >
-          <span v-else>{{ value }}</span>
+          <span v-else class="ellipsis">{{ value }}</span>
         </template>
       </div>
     </template>
@@ -72,5 +80,9 @@ h1 {
 
 .icon-placeholder {
   width: 1em;
+}
+
+.ellipsis {
+  max-width: var(--aside-content-width);
 }
 </style>
