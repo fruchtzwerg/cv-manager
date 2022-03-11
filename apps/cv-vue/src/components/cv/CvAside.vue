@@ -19,7 +19,7 @@
     </InlineControls>
 
     <TransitionGroup name="list">
-      <template v-for="list in activeSkills" :key="list.id">
+      <div v-for="list in activeSkills" :key="list.id" class="aside-section">
         <InlineControls>
           <template #editor="{ visible, close }">
             <SkillEditor
@@ -34,7 +34,7 @@
             <CvAsideList v-if="visible" :list="list"></CvAsideList>
           </template>
         </InlineControls>
-      </template>
+      </div>
     </TransitionGroup>
 
     <div
@@ -94,11 +94,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.aside-section:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
 aside {
   background-color: var(--aside-background);
   z-index: 0;
 
-  padding: 0 1rem;
+  padding: 2rem 1rem;
   min-height: 100vh;
 }
 
@@ -114,7 +118,6 @@ aside {
 @media print {
   aside {
     position: relative;
-    padding-top: 1rem;
   }
 }
 </style>

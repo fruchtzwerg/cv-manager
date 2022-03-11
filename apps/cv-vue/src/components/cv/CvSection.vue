@@ -1,5 +1,8 @@
 <template>
-  <section :class="{ pagebreak: section.pagebreak && section.active }">
+  <section
+    class="section"
+    :class="{ pagebreak: section.pagebreak && section.active }"
+  >
     <template v-if="section.heading">
       <InlineControls
         :id="section.id"
@@ -98,13 +101,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-section,
-.part {
-  background-color: white;
+.section:not(:last-child) {
+  margin-bottom: 5rem;
 }
-
-.part + .part {
-  margin-top: 3rem;
+.part:not(:last-child) {
+  margin-bottom: 3rem;
 }
 </style>
 

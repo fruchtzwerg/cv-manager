@@ -87,6 +87,7 @@ $margin: 1rem;
 @use './styles/cv-aside.scss';
 @use './styles/cv-content.scss';
 @use './styles/sidebar.scss';
+@use './styles/animations.scss';
 
 @media print {
   @page {
@@ -136,25 +137,6 @@ body {
     display: block;
     margin-right: var(--sidebar-offset-width);
   }
-}
-
-// fix inner transition
-.list-move .list-move {
-  transition: none !important;
-}
-
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.list-leave-active {
-  position: absolute;
 }
 
 .icon {

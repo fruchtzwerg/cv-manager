@@ -15,7 +15,7 @@
   font-size: var(--aside-heading-font-size);
   font-weight: var(--aside-font-heading-weight);
   font-family: var(--aside-font-family);
-  margin: 1 + $margin 0 $margin;
+  margin: 0 0 $margin 0;
 
   &::placeholder {
     color: var(--aside-color);
@@ -23,7 +23,6 @@
   }
 
   &.first {
-    margin-top: $margin;
     text-align: center;
   }
 }

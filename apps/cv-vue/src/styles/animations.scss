@@ -1,0 +1,23 @@
+$timing: 0.5s;
+$easing: ease;
+$offset: 100px;
+
+// fix inner transition
+.list-move .list-move {
+  transition: none !important;
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: transform $timing $easing, opacity $timing $easing;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX($offset);
+}
+
+.list-leave-active {
+  position: absolute;
+}

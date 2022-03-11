@@ -5,8 +5,6 @@
         v-for="section in activeSections"
         :key="section.id"
         :id="section.id"
-        class="section"
-        :class="{ pagebreak: section.pagebreak }"
       ></CvSection>
     </TransitionGroup>
   </div>
@@ -46,17 +44,6 @@ export default defineComponent({
 }
 
 .cv-content {
-  padding: 0 1rem;
-
-  // @include page-grid;
-}
-</style>
-
-<style lang="scss">
-.section {
-  transition: margin-top 0.1s linear;
-}
-.section + .section {
-  margin-top: 5rem;
+  padding: 2rem 1rem;
 }
 </style>
