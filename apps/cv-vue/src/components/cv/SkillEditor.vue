@@ -35,13 +35,11 @@
 
     <div class="actions screen-only">
       <Button
-        label="Discard"
         icon="pi pi-times"
         class="p-button-rounded p-button-outlined"
         @click="$emit('discard')"
       ></Button>
       <Button
-        label="Save"
         icon="pi pi-check"
         class="p-button-rounded p-button-raised"
         @click="save(model)"
@@ -93,9 +91,10 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .input-wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 1rem;
+  max-width: calc(100% - 1rem - 6px);
 
   .pi {
     cursor: pointer;
