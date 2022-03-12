@@ -2,7 +2,7 @@
   <div class="editor contact">
     <input
       v-model="model.heading"
-      class="aside-heading"
+      class="aside-heading first"
       placeholder="Heading"
       @keyup.enter="$emit('save', cloneDeep(model))"
     />
@@ -38,13 +38,11 @@
 
     <div class="actions screen-only">
       <Button
-        label="Discard"
         icon="pi pi-times"
         class="p-button-rounded p-button-outlined"
         @click="$emit('discard')"
       ></Button>
       <Button
-        label="Save"
         icon="pi pi-check"
         class="p-button-rounded p-button-raised"
         @click="$emit('save', cloneDeep(model))"
