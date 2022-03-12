@@ -1,6 +1,8 @@
-import { ContentState } from '../store';
+import { ContentState } from '../models/store/v1.model';
+import { VERSION } from '../constants/version.const';
 
 export const example: ContentState = {
+  version: VERSION,
   contactInfo: {
     heading: 'Contact',
     records: {

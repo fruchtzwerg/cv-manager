@@ -27,7 +27,7 @@ export default defineComponent({
   name: 'Import',
   components: { SplitButton },
   setup() {
-    const confirm = useConfirm();
+    const dialog = useConfirm();
     const file = ref();
     const store = useContentStore();
 
@@ -36,11 +36,11 @@ export default defineComponent({
         label: 'Example',
         icon: 'pi pi-file',
         command: () =>
-          confirm.require({
+          dialog.require({
             header: 'Delete Content',
             message: 'This will replace your current content. Are you sure?',
             icon: 'pi pi-exclamation-triangle',
-            accept: () => store.$patch(example),
+            accept: () => store.import(example),
           }),
       },
     ];
@@ -53,7 +53,7 @@ export default defineComponent({
       const text = await file.text();
 
       try {
-        store.$patch(JSON.parse(text));
+        store.import(JSON.parse(text));
       } catch (err) {
         console.warn(err);
       }

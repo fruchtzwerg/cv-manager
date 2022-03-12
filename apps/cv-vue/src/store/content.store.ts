@@ -1,33 +1,17 @@
 import { defineStore } from 'pinia';
 import { Section, SectionPart } from '../models/content.model';
 import { v4 as uuid } from 'uuid';
-import { CSSProperties } from 'vue';
 import { SectionNotFoundError } from '../utils/section-not-found.error';
 import { PartNotFoundError } from '../utils/part-not-found.error';
 import { Skill, SkillSection } from '../models/skill.model';
-import { ContactInfo } from '../models/contact-info.model';
 import { SkillNotFoundError } from '../utils/skill-not-found.error';
 import { cloneDeep, mapValues } from 'lodash-es';
 import { normalizeColor } from '../utils/normalize-color.util';
-
-interface Content {
-  sections: Section[];
-}
-
-type ComponentStyle = 'sidebar';
-
-interface Style extends Record<ComponentStyle, CSSProperties> {
-  colors: Record<string, string>;
-}
-
-export interface ContentState {
-  contactInfo: Partial<ContactInfo>;
-  skills: SkillSection[];
-  content: Content;
-  style: Style;
-}
+import { VERSION } from '../constants/version.const';
+import { ContentState } from '../models/store/v1.model';
 
 const CONTENT_DEFAULT: ContentState = {
+  version: VERSION,
   contactInfo: {
     heading: 'Contact',
     records: undefined,
@@ -59,10 +43,10 @@ export const useContentStore = defineStore('content', {
 
   getters: {
     download: state => {
-      const { contactInfo, skills, content, style } = state;
+      const { version, contactInfo, skills, content, style } = state;
 
       return `data:text/json;charset=utf-8,${encodeURIComponent(
-        JSON.stringify({ contactInfo, skills, content, style })
+        JSON.stringify({ version, contactInfo, skills, content, style })
       )}`;
     },
     hasContent: state => !!state.content.sections?.length,
@@ -166,6 +150,20 @@ export const useContentStore = defineStore('content', {
       if (index < 0) throw new PartNotFoundError(id);
 
       section?.parts.splice(index, 1);
+    },
+
+    // Import
+    async import(state: ContentState) {
+      if (state.version !== VERSION) {
+        console.log(VERSION);
+        const message = `The document you are trying to load uses an old version. Some features might not work properly.\n\ncurrent: v${VERSION}\nyour: v${state.version}`;
+
+        const confirmation = confirm(message);
+
+        if (!confirmation) return;
+      }
+
+      this.$patch(state);
     },
   },
 

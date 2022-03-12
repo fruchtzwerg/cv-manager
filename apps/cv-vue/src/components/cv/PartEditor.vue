@@ -62,7 +62,7 @@ const trimEnd = (text: string | undefined, tail = '<p><br></p>'): string => {
     : text;
 };
 
-const trimEmpty = (props: any) =>
+const trimEmpty = (props: Record<string, unknown>) =>
   Object.entries(props).reduce(
     (acc, [key, value]) => ({ ...acc, [key]: value || undefined }),
     {}
