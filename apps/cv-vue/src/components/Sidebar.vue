@@ -60,6 +60,12 @@ export default defineComponent({
 @use '../styles/variables.scss' as vars;
 
 .p-tabview {
+  @mixin border($border-width) {
+    border-color: var(--bluegray-100);
+    border-style: solid;
+    border-width: $border-width;
+  }
+
   .p-tabview-nav li {
     width: 100%;
 
@@ -76,11 +82,15 @@ export default defineComponent({
     overflow: hidden;
     border-top-left-radius: vars.$radius;
     border-top-right-radius: vars.$radius;
+
+    @include border(1px 1px 0 1px);
   }
   .p-tabview-panels {
     overflow-y: auto;
     border-bottom-left-radius: vars.$radius;
     border-bottom-right-radius: vars.$radius;
+
+    @include border(0 1px 1px 1px);
   }
 }
 </style>
