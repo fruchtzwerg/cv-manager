@@ -1,26 +1,25 @@
 <template>
-  <aside
-    ref="aside"
-    :style="{ width: style.sidebar.width, minWidth: style.sidebar.width }"
-  >
-    <InlineControls :id="'contact'">
-      <template #editor="{ visible, close }">
-        <ContactEditor
-          v-if="visible"
-          v-bind="contactInfo"
-          @save="saveContact($event), close()"
-          @discard="close"
-        ></ContactEditor>
-      </template>
+  <aside ref="aside" :style="{ width: style.sidebar.width }">
+    <div class="aside-section">
+      <InlineControls :id="'contact'" :page="false">
+        <template #editor="{ visible, close }">
+          <ContactEditor
+            v-if="visible"
+            v-bind="contactInfo"
+            @save="saveContact($event), close()"
+            @discard="close"
+          ></ContactEditor>
+        </template>
 
-      <template v-slot="{ visible }">
-        <CvContact v-if="visible" v-bind="contactInfo"></CvContact>
-      </template>
-    </InlineControls>
+        <template v-slot="{ visible }">
+          <CvContact v-if="visible" v-bind="contactInfo"></CvContact>
+        </template>
+      </InlineControls>
+    </div>
 
     <TransitionGroup name="list">
       <div v-for="list in activeSkills" :key="list.id" class="aside-section">
-        <InlineControls>
+        <InlineControls :page="false">
           <template #editor="{ visible, close }">
             <SkillEditor
               v-bind="list"
@@ -104,6 +103,7 @@ aside {
 
   padding: 2rem 1rem;
   min-height: 100vh;
+  min-width: 256px;
 }
 
 #print-bg {

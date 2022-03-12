@@ -6,7 +6,7 @@
         :style="{ opacity: hovered ? 1 : 0 }"
         v-if="hovered"
       >
-        <div class="button-wrapper">
+        <div v-if="edit" class="button-wrapper" :class="{ solid: page }">
           <Button
             icon="pi pi-pencil"
             class="p-button-outlined button-sm"
@@ -14,6 +14,7 @@
           />
         </div>
         <ToggleButton
+          v-if="page"
           :binary="true"
           :model-value="pagebreak"
           class="button-sm"
@@ -49,6 +50,14 @@ export default defineComponent({
   props: {
     id: String,
     pagebreak: Boolean,
+    edit: {
+      type: Boolean,
+      default: true,
+    },
+    page: {
+      type: Boolean,
+      default: true,
+    },
   },
   emits: ['update:pagebreak', 'open:editor'],
   setup() {
@@ -68,6 +77,7 @@ export default defineComponent({
 .controls {
   position: absolute;
   right: 0;
+  height: 40px;
 
   transition: opacity 0.2s ease;
 }
@@ -78,8 +88,11 @@ export default defineComponent({
 }
 
 .button-wrapper {
-  background-color: white;
   border-radius: 6px;
+
+  &.solid {
+    background-color: white;
+  }
 
   .p-button {
     height: 100%;
