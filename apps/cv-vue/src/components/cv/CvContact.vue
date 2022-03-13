@@ -8,34 +8,40 @@
           <component :is="icons[key]"></component>
 
           <template v-for="substring in value" :key="substring">
-            <span class="ellipsis">{{ substring }}</span>
+            <div class="c-wrapper">
+              <span v-fitty>{{ substring }}</span>
+            </div>
             <br />
           </template>
         </template>
       </div>
 
-      <div v-else class="line" :class="{}">
+      <div v-else class="line">
         <template v-if="value">
           <component :is="icons[key]"></component>
 
-          <a v-if="key === 'mail'" :href="`mailto:${value}`" class="ellipsis">{{
-            value
-          }}</a>
-          <a
-            v-else-if="key === 'phone'"
-            :href="`tel:${value}`"
-            class="ellipsis"
-            >{{ value }}</a
-          >
-          <a
-            v-else-if="key === 'web'"
-            :href="normalizeHref(value)"
-            target="_blank"
-            rel="noopener"
-            class="ellipsis"
-            >{{ value }}</a
-          >
-          <span v-else class="ellipsis">{{ value }}</span>
+          <div class="c-wrapper">
+            <!-- Mail -->
+            <a v-if="key === 'mail'" :href="`mailto:${value}`" v-fitty>
+              {{ value }}
+            </a>
+            <!-- Phone -->
+            <a v-else-if="key === 'phone'" :href="`tel:${value}`" v-fitty>
+              {{ value }}
+            </a>
+            <!-- Web -->
+            <a
+              v-else-if="key === 'web'"
+              :href="normalizeHref(value)"
+              target="_blank"
+              rel="noopener"
+              v-fitty
+            >
+              {{ value }}
+            </a>
+            <!-- Address -->
+            <span v-else v-fitty>{{ value }}</span>
+          </div>
         </template>
       </div>
     </template>
@@ -48,11 +54,15 @@ import { defineComponent, PropType } from 'vue';
 import { ContactInfo } from '../../models/contact-info.model';
 import { icons } from '../../constants/icons.const';
 import { normalizeHref } from '../../utils/normalize-href.util';
+import { fitty } from '../../directives/fitty';
 
 export default defineComponent({
   name: 'CvContact',
   components: {
     ...(Object.values(icons) as any),
+  },
+  directives: {
+    fitty,
   },
   props: {
     heading: String,
@@ -67,6 +77,11 @@ export default defineComponent({
 <style scoped lang="scss">
 h1 {
   font-size: var(--aside-heading-font-size);
+}
+
+.c-wrapper {
+  display: flex;
+  max-width: calc(7cm - 4rem);
 }
 
 .contact {

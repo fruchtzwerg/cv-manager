@@ -43,6 +43,8 @@ export default defineComponent({
 @use '@material/elevation' as mat;
 
 $margin: 1rem;
+$margin-top: 7rem;
+$margin-bottom: 2rem;
 
 #toolbar {
   position: fixed;
@@ -64,7 +66,7 @@ $margin: 1rem;
   min-width: $A4-width;
 
   @media screen {
-    margin: 7rem auto;
+    margin: $margin-top auto $margin-bottom;
     border-radius: 1rem;
     overflow: hidden;
     @include mat.elevation(4);
@@ -72,11 +74,9 @@ $margin: 1rem;
 }
 
 #sidebar {
-  $margin-y: 7rem;
-
   position: fixed;
-  top: $margin-y;
-  bottom: $margin-y;
+  top: $margin-top;
+  bottom: $margin-bottom;
   right: $margin;
   transition: width 0.5s ease-out;
 }
@@ -167,5 +167,9 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+
+  &.wrap {
+    white-space: normal;
+  }
 }
 </style>

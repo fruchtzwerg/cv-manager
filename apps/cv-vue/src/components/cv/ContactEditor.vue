@@ -93,6 +93,9 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.editor {
+  min-width: 200px;
+}
 .editor input {
   color: var(--aside-color);
 }

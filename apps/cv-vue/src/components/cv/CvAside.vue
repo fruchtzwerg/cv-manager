@@ -103,7 +103,7 @@ aside {
 
   padding: 2rem 1rem;
   min-height: 100vh;
-  min-width: 256px;
+  max-width: 7cm;
 }
 
 #print-bg {
