@@ -1,6 +1,7 @@
 {
+  "name": "cv-vue",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/cv-vue",
   "sourceRoot": "apps/cv-vue/src",
   "targets": {
     "build": {
@@ -58,9 +59,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/cv-vue"],
+      "outputs": ["{workspaceRoot}/coverage/apps/cv-vue"],
       "options": {
-        "jestConfig": "apps/cv-vue/jest.config.js",
+        "jestConfig": "apps/cv-vue/jest.config.ts",
         "passWithNoTests": true
       }
     }

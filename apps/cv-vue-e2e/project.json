@@ -1,5 +1,6 @@
 {
-  "root": "apps/cv-vue-e2e",
+  "name": "cv-vue-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/cv-vue-e2e/src",
   "projectType": "application",
   "targets": {
