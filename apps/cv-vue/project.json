@@ -5,21 +5,9 @@
   "sourceRoot": "apps/cv-vue/src",
   "targets": {
     "build": {
-      "executor": "@nx-plus/vue:browser",
+      "executor": "@nrwl/vite:build",
       "options": {
-        "dest": "dist/apps/cv-vue",
-        "index": "apps/cv-vue/public/index.html",
-        "main": "apps/cv-vue/src/main.ts",
-        "tsConfig": "apps/cv-vue/tsconfig.app.json",
-        "css": {
-          "loaderOptions": {
-            "scss": {
-              "sassOptions": {
-                "includePaths": ["./node_modules"]
-              }
-            }
-          }
-        }
+        "outputPath": "dist/apps/cv-vue"
       },
       "configurations": {
         "production": {
@@ -41,9 +29,11 @@
       }
     },
     "serve": {
-      "executor": "@nx-plus/vue:dev-server",
+      "executor": "@nrwl/vite:dev-server",
+      "defaultConfiguration": "development",
       "options": {
-        "browserTarget": "cv-vue:build"
+        "buildTarget": "cv-vue:build",
+        "port": 4200
       },
       "configurations": {
         "production": {

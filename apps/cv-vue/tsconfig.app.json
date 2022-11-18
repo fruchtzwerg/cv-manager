@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["webpack-env", "node"]
+    "types": ["vite/client", "node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "jest.config.ts"],
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
