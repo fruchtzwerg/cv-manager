@@ -2,16 +2,12 @@
   <div class="editor contact">
     <input
       v-model="model.heading"
-      class="aside-heading first"
       placeholder="Heading"
+      class="aside-heading first"
       @keyup.enter="$emit('save', cloneDeep(model))"
     />
 
-    <div
-      v-for="(record, key) in filtered.info"
-      :key="record"
-      class="line aside-text"
-    >
+    <div v-for="(record, key) in filtered.info" :key="record" class="line aside-text">
       <component :is="icons[key]"></component>
 
       <input
@@ -25,7 +21,7 @@
     <div class="multiline aside-text">
       <component :is="icons.address"></component>
 
-      <template v-for="(record, i) in filtered.address" :key="record">
+      <template v-for="(_record, i) in filtered.address" :key="_record">
         <input
           v-model="model.records.address[i]"
           :placeholder="i === 0 ? 'Street' : 'City'"
@@ -36,17 +32,13 @@
       </template>
     </div>
 
-    <div class="actions screen-only">
-      <Button
-        icon="pi pi-times"
-        class="p-button-rounded p-button-outlined"
-        @click="$emit('discard')"
-      ></Button>
-      <Button
-        icon="pi pi-check"
-        class="p-button-rounded p-button-raised"
-        @click="$emit('save', cloneDeep(model))"
-      ></Button>
+    <div class="actions print:hidden">
+      <button class="btn btn-circle btn-outline btn-error" @click="$emit('discard')">
+        <icon-carbon-close class="text-xl" />
+      </button>
+      <button class="btn btn-circle btn-success" @click="$emit('save', cloneDeep(model))">
+        <icon-carbon-checkmark class="text-xl" />
+      </button>
     </div>
   </div>
 </template>

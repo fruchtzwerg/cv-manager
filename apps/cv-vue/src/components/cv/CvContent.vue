@@ -1,11 +1,7 @@
 <template>
-  <div class="cv-content">
+  <div class="cv-content" data-theme="winter">
     <TransitionGroup name="list">
-      <CvSection
-        v-for="section in activeSections"
-        :key="section.id"
-        :id="section.id"
-      ></CvSection>
+      <CvSection v-for="section in activeSections" :key="section.id" :id="section.id"></CvSection>
     </TransitionGroup>
   </div>
 </template>

@@ -2,9 +2,9 @@ import SidebarManager from '../components/controls/SidebarManager.vue';
 import ContentManager from '../components/controls/ContentManager.vue';
 import SettingsManager from '../components/controls/SettingsManager.vue';
 
-import ContentIcon from '../components/icons/TextIcon.vue';
-import AsideIcon from '../components/icons/AsideIcon.vue';
-import SettingsIcon from '../components/icons/SettingsIcon.vue';
+import IconSidePanel from '~icons/carbon/side-panel-close-filled';
+import IconTextLineSpacing from '~icons/carbon/text-line-spacing';
+import IconSettingsAdjust from '~icons/carbon/settings-adjust';
 
 import { Component } from 'vue';
 
@@ -15,7 +15,11 @@ interface Tab {
 }
 
 export const tabs: Tab[] = [
-  { label: 'Sidebar', icon: AsideIcon, component: SidebarManager },
-  { label: 'Content', icon: ContentIcon, component: ContentManager },
-  { label: '', icon: SettingsIcon, component: SettingsManager },
+  {
+    label: 'Aside',
+    icon: IconSidePanel,
+    component: SidebarManager,
+  },
+  { label: 'Content', icon: IconTextLineSpacing, component: ContentManager },
+  { label: '', icon: IconSettingsAdjust, component: SettingsManager },
 ];

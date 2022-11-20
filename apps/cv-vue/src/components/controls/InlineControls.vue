@@ -2,51 +2,46 @@
   <div class="container">
     <MouseOver v-slot="{ hovered }">
       <div
-        class="screen-only field-checkbox controls"
+        class="print:hidden field-checkbox controls"
         :style="{ opacity: hovered ? 1 : 0 }"
         v-if="hovered"
       >
-        <div v-if="edit" class="button-wrapper" :class="{ solid: page }">
-          <Button
-            icon="pi pi-pencil"
-            class="p-button-outlined button-sm"
+        <div v-if="edit">
+          <button
+            class="btn btn-outline btn-square btn-secondary text-lg"
+            :class="{ 'bg-white/90': page }"
             @click="(showEditor = true), $emit('open:editor', id)"
-          />
+          >
+            <icon-carbon-edit />
+          </button>
         </div>
+
         <ToggleButton
-          v-if="page"
-          :binary="true"
           :model-value="pagebreak"
-          class="button-sm"
+          :class="{ 'bg-white': page }"
           @update:model-value="$emit('update:pagebreak', $event)"
-          on-icon="icon icon-pb-on"
-          off-icon="icon icon-pb"
         >
+          <icon-carbon-page-break />
         </ToggleButton>
       </div>
 
       <slot :visible="!showEditor"></slot>
     </MouseOver>
 
-    <slot
-      name="editor"
-      :visible="showEditor"
-      :close="() => (showEditor = false)"
-    ></slot>
+    <slot name="editor" :visible="showEditor" :close="() => (showEditor = false)"></slot>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import Button from 'primevue/button';
-import ToggleButton from 'primevue/togglebutton';
+import ToggleButton from '../util/ToggleButton.vue';
 
 import MouseOver from '../util/MouseOver.vue';
 
 export default defineComponent({
   name: 'InlineControls',
-  components: { ToggleButton, Button, MouseOver },
+  components: { ToggleButton, MouseOver },
   props: {
     id: String,
     pagebreak: Boolean,
@@ -85,17 +80,5 @@ export default defineComponent({
 .field-checkbox {
   display: flex;
   gap: 1rem;
-}
-
-.button-wrapper {
-  border-radius: 6px;
-
-  &.solid {
-    background-color: white;
-  }
-
-  .p-button {
-    height: 100%;
-  }
 }
 </style>

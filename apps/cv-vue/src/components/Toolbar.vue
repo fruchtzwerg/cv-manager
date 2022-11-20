@@ -1,12 +1,17 @@
 <template>
-  <div class="toolbar">
-    <div class="actions">
-      <ContentImport></ContentImport>
-      <ContentDownload></ContentDownload>
-      <ContentClear></ContentClear>
+  <div class="navbar w-auto bg-base-100/80 backdrop-blur-md">
+    <div class="flex-1">
+      <div class="btn-group">
+        <ContentImport />
+        <ContentDownload />
+        <ContentClear />
+      </div>
     </div>
 
-    <ContentPrint></ContentPrint>
+    <div class="max-xl:btn-group flex-none">
+      <ContentPrint />
+      <ToggleSidebar class="xl:!hidden" />
+    </div>
   </div>
 </template>
 
@@ -17,6 +22,7 @@ import ContentDownload from './controls/ContentDownload.vue';
 import ContentImport from './controls/ContentImport.vue';
 import ContentPrint from './controls/ContentPrint.vue';
 import ContentClear from './controls/ContentClear.vue';
+import ToggleSidebar from './controls/ToggleSidebar.vue';
 
 export default defineComponent({
   name: 'Toolbar',
@@ -25,30 +31,9 @@ export default defineComponent({
     ContentImport,
     ContentPrint,
     ContentClear,
+    ToggleSidebar,
   },
 });
 </script>
 
-<style scoped lang="scss">
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-}
-
-.actions {
-  display: flex;
-  gap: 0.5rem;
-  height: 100%;
-}
-</style>
-
-<style lang="scss">
-.toolbar-item,
-.toolbar-item button {
-  border-radius: 0;
-
-  &:focus {
-    box-shadow: none;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

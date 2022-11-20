@@ -9,16 +9,15 @@
     />
 
     <div class="actions">
-      <Button
-        icon="pi pi-times"
-        class="p-button-rounded p-button-outlined"
-        @click="$emit('discard')"
-      ></Button>
-      <Button
-        icon="pi pi-check"
-        class="p-button-rounded p-button-raised"
+      <button class="btn-action btn-error" @click="$emit('discard')">
+        <icon-carbon-close />
+      </button>
+      <button
+        class="btn-action btn-success"
         @click="$emit('save', { heading: headingInput?.value })"
-      ></Button>
+      >
+        <icon-carbon-checkmark />
+      </button>
     </div>
   </div>
 </template>
@@ -26,11 +25,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import Button from 'primevue/button';
-
 export default defineComponent({
   name: 'SectionEditor',
-  components: { Button },
+
   props: {
     id: String,
     heading: String,
@@ -56,17 +53,13 @@ export default defineComponent({
   gap: 0.5rem;
   font-size: 2.25rem;
   margin-bottom: 0.83em;
+}
 
-  .actions {
-    $size: calc(2.25rem + 7px);
+.actions {
+  @apply absolute right-0 h-full flex items-center gap-2;
+}
 
-    display: flex;
-    gap: 0.5rem;
-
-    .p-button-rounded {
-      height: $size;
-      width: $size;
-    }
-  }
+.btn-action {
+  @apply btn btn-circle btn-outline bg-white text-xl font-light;
 }
 </style>

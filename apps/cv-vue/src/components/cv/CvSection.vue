@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="section"
-    :class="{ pagebreak: section.pagebreak && section.active }"
-  >
+  <section class="section prose" :class="{ pagebreak: section.pagebreak && section.active }">
     <template v-if="section.heading">
       <InlineControls
         :id="section.id"
@@ -20,11 +17,7 @@
         </template>
 
         <template v-slot="{ visible }">
-          <h1
-            v-if="visible"
-            class="section-heading"
-            :class="{ first: section.id === first.id }"
-          >
+          <h1 v-if="visible" class="section-heading" :class="{ first: section.id === first.id }">
             {{ section.heading }}
           </h1>
         </template>
@@ -85,9 +78,7 @@ export default defineComponent({
     const store = useContentStore();
     const { activeSections } = storeToRefs(store);
 
-    const section = computed(
-      () => activeSections.value.find(s => s.id === props.id)!
-    );
+    const section = computed(() => activeSections.value.find(s => s.id === props.id)!);
 
     const first = computed(() => activeSections.value[0]);
 

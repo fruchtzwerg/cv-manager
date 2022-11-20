@@ -1,47 +1,76 @@
 <template>
+  <button class="btn btn-ghost gap-2" @click="file.click()">
+    <icon-carbon-document-import class="text-lg" />Load
+  </button>
+
+  <div class="dropdown">
+    <label tabindex="0" class="btn btn-ghost w-8 p-0 !rounded-none"
+      ><icon-carbon-chevron-down class="text-lg"
+    /></label>
+    <ul tabindex="0" class="dropdown-content p-2">
+      <li v-for="item of items" :key="item.label">
+        <MenuItem :item="item" />
+      </li>
+    </ul>
+  </div>
+
   <input
     type="file"
     accept="application/json"
     ref="file"
     @change="fileChanged(($event.target as HTMLInputElement).files)"
   />
-  <SplitButton
-    label="Load"
-    icon="pi pi-download"
-    class="p-button-text toolbar-item"
-    @click="file.click()"
-    :model="items"
-  />
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="tsx">
+import { defineComponent, ref, FunctionalComponent, Component } from 'vue';
 
-import SplitButton from 'primevue/splitbutton';
+import Modal from '../dialog/Modal.vue';
 
 import { useContentStore } from '../../store';
-import { useConfirm } from 'primevue/useconfirm';
-import { example } from '../../constants/example.const';
+
+interface Item {
+  label: string;
+  icon: Component;
+  command: () => void;
+}
+
+const MenuItem: FunctionalComponent<{ item: Item }> = ({ item }) => (
+  <Modal onConfirmed={item.command}>
+    {{
+      trigger: () => (
+        <>
+          {item.icon}
+          {item.label}
+        </>
+      ),
+      heading: () => 'Replace content',
+      message: () => (
+        <div class="flex items-center gap-4">
+          <icon-carbon-warning-alt class="text-4xl text-warning" />
+          <span>This will replace your current content. Are you sure?</span>
+        </div>
+      ),
+    }}
+  </Modal>
+);
 
 export default defineComponent({
   name: 'Import',
-  components: { SplitButton },
+  components: { MenuItem },
+
   setup() {
-    const dialog = useConfirm();
     const file = ref();
     const store = useContentStore();
 
-    const items = [
+    const items: Item[] = [
       {
         label: 'Example',
-        icon: 'pi pi-file',
-        command: () =>
-          dialog.require({
-            header: 'Delete Content',
-            message: 'This will replace your current content. Are you sure?',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => store.import(example),
-          }),
+        icon: <icon-carbon-document />,
+        command: async () => {
+          const { example } = await import('../../constants/example.const');
+          store.import(example);
+        },
       },
     ];
 
@@ -67,5 +96,9 @@ export default defineComponent({
 <style scoped lang="scss">
 input {
   display: none;
+}
+
+.dropdown-content {
+  @apply menu p-2 top-16 rounded-box w-52 shadow bg-base-100/80 backdrop-blur-sm;
 }
 </style>

@@ -1,35 +1,39 @@
 <template>
-  <Button
-    label="Clear"
-    icon="pi pi-trash"
-    class="p-button-text toolbar-item"
-    @click="clear"
-  ></Button>
+  <Modal class="btn btn-ghost btn-error gap-2" @confirmed="clear()">
+    <template #trigger>
+      <icon-carbon-trash-can class="text-lg" />
+      <span>Clear</span>
+    </template>
+
+    <template #heading>Clear CV</template>
+
+    <template #message>
+      <div class="flex items-center gap-4">
+        <icon-carbon-warning-alt class="text-4xl text-warning-content dark:text-warning" />
+        <span
+          >You are about to remove
+          <span class="font-bold underline text-warning-content dark:text-warning">all</span>
+          data. Are you sure?</span
+        >
+      </div>
+    </template>
+  </Modal>
 </template>
 
 <script lang="ts">
-import { useConfirm } from 'primevue/useconfirm';
 import { defineComponent } from 'vue';
-
-import Button from 'primevue/button';
+import Modal from '../dialog/Modal.vue';
 
 import { useContentStore } from '../../store';
 
 export default defineComponent({
   name: 'ContentClear',
-  components: { Button },
+  components: { Modal },
+
   setup() {
     const store = useContentStore();
-    const confirm = useConfirm();
 
-    const clear = () => {
-      confirm.require({
-        header: 'Clear CV',
-        message: 'You are about to remove ALL data. Are you sure?',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => store.$reset(),
-      });
-    };
+    const clear = () => store.$reset();
 
     return { clear };
   },

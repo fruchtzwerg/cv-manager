@@ -1,7 +1,7 @@
 <template>
-  <aside ref="aside" :style="{ width: style.sidebar.width }">
+  <aside ref="aside" class="print:relative" :style="{ width: style.sidebar.width }">
     <div class="aside-section">
-      <InlineControls :id="'contact'" :page="false">
+      <InlineControls :id="'contact'" page>
         <template #editor="{ visible, close }">
           <ContactEditor
             v-if="visible"
@@ -36,11 +36,7 @@
       </div>
     </TransitionGroup>
 
-    <div
-      id="print-bg"
-      :style="{ width: `${width}px` }"
-      class="print-only"
-    ></div>
+    <div id="print-bg" :style="{ width: `${width}px` }" class="screen:hidden"></div>
   </aside>
 </template>
 
@@ -74,8 +70,7 @@ export default defineComponent({
     const { patchSkillSection } = store;
     const { style, contactInfo, activeSkills } = storeToRefs(store);
 
-    const saveContact = (contactInfo: ContactInfo) =>
-      store.$patch({ contactInfo });
+    const saveContact = (contactInfo: ContactInfo) => store.$patch({ contactInfo });
 
     const { width } = useElementBounding(aside);
 
@@ -98,26 +93,11 @@ export default defineComponent({
 }
 
 aside {
-  background-color: var(--aside-background);
-  z-index: 0;
-
-  padding: 2rem 1rem;
-  min-height: 100vh;
-  max-width: 7cm;
+  @apply bg-[var(--aside-background)] z-0 px-4 py-8 min-h-screen max-w-[7cm];
 }
 
 #print-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
+  @apply fixed top-0 left-0 bottom-0 -z-10;
   background-color: var(--aside-background);
-}
-
-@media print {
-  aside {
-    position: relative;
-  }
 }
 </style>

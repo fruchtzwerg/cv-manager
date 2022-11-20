@@ -1,10 +1,10 @@
 import { Component } from 'vue';
 import { Icon } from '../models/contact-info.model';
 
-import MailIcon from '../components/icons/MailIcon.vue';
-import PhoneIcon from '../components/icons/PhoneIcon.vue';
-import AddressIcon from '../components/icons/AddressIcon.vue';
-import WebIcon from '../components/icons/WebIcon.vue';
+import WebIcon from '~icons/fluent/globe-person-24-regular';
+import PhoneIcon from '~icons/fluent/phone-28-regular';
+import AddressIcon from '~icons/fluent/location-28-regular';
+import MailIcon from '~icons/fluent/mention-24-regular';
 
 export const icons: Record<Icon, Component> = {
   mail: MailIcon,

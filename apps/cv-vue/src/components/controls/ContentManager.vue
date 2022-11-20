@@ -9,16 +9,15 @@
     >
       <template #item="{ element: section, index }">
         <li class="item section">
+          <!-- section heading -->
           <h3 :class="{ first: !index }">
+            <icon-carbon-drag-vertical class="text-base" />
             <div class="ellipsis">{{ section.heading ?? '---' }}</div>
-            <Button
-              icon="pi pi-trash"
-              class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
-              @click="confirmDeleteSection(section)"
-            ></Button>
-            <Checkbox v-model="section.active" :binary="true"></Checkbox>
+            <ButtonRemove @click="confirmDeleteSection(section)" />
+            <input type="checkbox" class="checkbox checkbox-sm" v-model="section.active" />
           </h3>
 
+          <!-- paragraphs -->
           <draggable
             v-model="section.parts"
             tag="ol"
@@ -27,22 +26,15 @@
           >
             <template #item="{ element: part }">
               <li class="item part">
-                <i class="pi pi-bars"></i>
+                <icon-carbon-draggable />
                 <div class="ellipsis">{{ getHeading(part) }}</div>
-                <Button
-                  icon="pi pi-trash"
-                  class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
-                  @click="confirmDeletePart(part, section.id)"
-                ></Button>
-                <Checkbox v-model="part.active" :binary="true"></Checkbox>
+                <ButtonRemove @click="confirmDeletePart(part, section.id)" />
+                <input type="checkbox" class="checkbox checkbox-sm" v-model="part.active" />
               </li>
             </template>
           </draggable>
 
-          <Button
-            class="p-button-text p-button-rounded add-btn"
-            label="Add paragraph"
-            icon="pi pi-plus"
+          <ButtonAdd
             @click="
               addPart(section, {
                 active: true,
@@ -51,15 +43,15 @@
               })
             "
           >
-          </Button>
+            Add paragraph
+          </ButtonAdd>
+
+          <div class="divider"></div>
         </li>
       </template>
     </draggable>
 
-    <Button
-      class="p-button-text p-button-rounded add-btn"
-      label="Add section"
-      icon="pi pi-plus"
+    <ButtonAdd
       @click="
         addSection({
           active: true,
@@ -68,29 +60,47 @@
         })
       "
     >
-    </Button>
+      Add section
+    </ButtonAdd>
 
     <ConfirmDialog></ConfirmDialog>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
+import { defineComponent, FunctionalComponent } from 'vue';
 
 import { useConfrimDelete } from '../../plugins/confirm-delete.plugin';
 import { useContentStore } from '../../store';
 
 import draggable from 'vuedraggable';
-import Button from 'primevue/button';
-import Checkbox from 'primevue/checkbox';
+
 import ConfirmDialog from 'primevue/confirmdialog';
 
 import { getHeading } from '../../utils/get-heading.util';
 
+const ButtonRemove: FunctionalComponent = () => (
+  <button class="btn btn-circle btn-ghost btn-sm btn-error">
+    <icon-carbon-trash-can />
+  </button>
+);
+
+const ButtonAdd: FunctionalComponent = (_props, { slots }) => (
+  <button class="btn btn-block btn-ghost gap-2 normal-case mt-2 btn-sm">
+    <icon-carbon-add />
+    {slots.default && slots.default()}
+  </button>
+);
+
 export default defineComponent({
   name: 'ContentManager',
-  components: { draggable, Button, Checkbox, ConfirmDialog },
+  components: {
+    draggable,
+    ConfirmDialog,
+    ButtonRemove,
+    ButtonAdd,
+  },
   setup() {
     const store = useContentStore();
     const { addPart, removePart, addSection, removeSection } = store;

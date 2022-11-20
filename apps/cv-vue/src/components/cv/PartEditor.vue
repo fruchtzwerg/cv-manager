@@ -32,18 +32,17 @@
     </Editor>
 
     <div class="actions">
-      <Button
-        class="p-button-outlined p-button-rounded"
-        label="Discard"
-        icon="pi pi-times"
-        @click="$emit('discard')"
-      ></Button>
-      <Button
-        class="p-button-raised p-button-rounded"
-        label="Save"
-        icon="pi pi-check"
+      <button class="btn rounded-full gap-2 btn-outline btn-error" @click="$emit('discard')">
+        <icon-carbon-close class="text-xl" />
+        Discard
+      </button>
+      <button
+        class="btn rounded-full gap-2 !btn-success shadow-sm shadow-black/30 hover:shadow-md hover:shadow-success/60"
         @click="$emit('save', result)"
-      ></Button>
+      >
+        <icon-carbon-checkmark class="text-lg" />
+        Save
+      </button>
     </div>
   </div>
 </template>
@@ -52,25 +51,19 @@
 import { computed, defineComponent, ref } from 'vue';
 
 import Editor from 'primevue/editor';
-import Button from 'primevue/button';
 
 const trimEnd = (text: string | undefined, tail = '<p><br></p>'): string => {
   if (!text) return '';
 
-  return text.endsWith(tail)
-    ? trimEnd(text.slice(0, text.length - tail.length))
-    : text;
+  return text.endsWith(tail) ? trimEnd(text.slice(0, text.length - tail.length)) : text;
 };
 
 const trimEmpty = (props: Record<string, unknown>) =>
-  Object.entries(props).reduce(
-    (acc, [key, value]) => ({ ...acc, [key]: value || undefined }),
-    {}
-  );
+  Object.entries(props).reduce((acc, [key, value]) => ({ ...acc, [key]: value || undefined }), {});
 
 export default defineComponent({
   name: 'PartEditor',
-  components: { Editor, Button },
+  components: { Editor },
   props: {
     heading: String,
     title: String,
@@ -99,9 +92,6 @@ export default defineComponent({
 }
 
 .actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin: 1rem 0;
+  @apply flex justify-end gap-4 mt-4;
 }
 </style>

@@ -1,17 +1,12 @@
 <template>
-  <Button
-    label="Save"
-    icon="pi pi-save"
-    class="p-button-text toolbar-item"
-    @click="createDownload(download)"
-  />
+  <button class="btn btn-ghost gap-2" @click="createDownload(download)">
+    <icon-carbon-save class="text-lg" />Save
+  </button>
 </template>
 
 <script lang="ts">
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-
-import Button from 'primevue/button';
 
 import { useContentStore } from '../../store';
 
@@ -27,7 +22,7 @@ const createDownload = (href: string) => {
 
 export default defineComponent({
   name: 'ContentDownload',
-  components: { Button },
+
   setup() {
     const store = useContentStore();
     const { download } = storeToRefs(store);

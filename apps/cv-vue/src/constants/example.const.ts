@@ -171,6 +171,7 @@ export const example: ContentState = {
     colors: {
       primary: '#282960',
       'primary-text': '#ffffff',
+      'section-heading': '#000000',
       heading: '#4547a9',
       title: '#4547a9',
       caption: '#282960',

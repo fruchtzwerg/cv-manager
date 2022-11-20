@@ -16,7 +16,7 @@
             placeholder="Skill"
             @keyup.enter="save(model)"
           />
-          <i class="pi pi-trash" @click="model.entries[i].value = ''"></i>
+          <ButtonClear @click="model.entries[i].value = ''" />
         </div>
       </li>
 
@@ -28,37 +28,38 @@
             @input="$event.target && (added[i] = ($event.target as any).value)"
             @keyup.enter="save(model)"
           />
-          <i v-if="added[i]" class="pi pi-trash" @click="added[i] = ''"></i>
+          <ButtonClear v-if="added[i]" @click="added[i] = ''" />
         </div>
       </li>
     </ul>
 
-    <div class="actions screen-only">
-      <Button
-        icon="pi pi-times"
-        class="p-button-rounded p-button-outlined"
-        @click="$emit('discard')"
-      ></Button>
-      <Button
-        icon="pi pi-check"
-        class="p-button-rounded p-button-raised"
-        @click="save(model)"
-      ></Button>
+    <div class="actions print:hidden">
+      <button class="btn btn-circle btn-outline btn-error" @click="$emit('discard')">
+        <icon-carbon-close class="text-xl" />
+      </button>
+      <button class="btn btn-circle btn-success shadow-md shadow-black/40" @click="save(model)">
+        <icon-carbon-checkmark class="text-xl" />
+      </button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { defineComponent, PropType, ref, watchEffect } from 'vue';
 import { cloneDeep } from 'lodash';
 
-import Button from 'primevue/button';
 import { Skill } from '../../models/skill.model';
 import { useContentStore } from '../../store';
 
+const ButtonClear = () => (
+  <button class="btn btn-ghost btn-xs btn-circle hover:bg-error/20">
+    <icon-carbon-trash-can class="text-error" />
+  </button>
+);
+
 export default defineComponent({
   name: 'SkillEditor',
-  components: { Button },
+  components: { ButtonClear },
   props: {
     heading: String,
     entries: { type: Array as PropType<Array<Skill>>, required: true },
@@ -91,14 +92,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .input-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
+  @apply inline-flex items-center gap-4;
   max-width: calc(100% - 1rem - 6px);
-
-  .pi {
-    cursor: pointer;
-    color: var(--red-400);
-  }
 }
 </style>

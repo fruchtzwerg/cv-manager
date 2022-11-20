@@ -1,62 +1,43 @@
 .manager {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col overflow-y-auto px-2 pb-2;
+  height: calc(100% - 2rem - 1rem);
 }
 
 .list {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
+  @apply p-0 m-0 list-none;
 }
 
 .item {
-  display: flex;
-  user-select: none;
-  cursor: row-resize;
+  @apply flex select-none cursor-row-resize;
 
   &.section {
-    flex-direction: column;
+    @apply flex-col gap-2;
 
     & + .section {
-      margin-top: 1rem;
+      @apply mt-4;
+    }
+
+    h3 {
+      @apply text-xl font-bold;
+    }
+
+    .part {
+      @apply text-sm;
     }
 
     h2,
-    h3 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0;
+    h3,
+    .part {
+      @apply grid items-center gap-2 mb-0;
+      grid-template-columns: auto 1fr auto auto;
 
       &.first {
-        margin-top: 0;
+        @apply mt-4;
       }
-    }
-  }
-
-  .p-button-xs {
-    $size: 2rem;
-    min-width: $size;
-    width: $size;
-    height: $size;
-  }
-
-  .pad-left {
-    margin-left: auto;
-  }
-
-  &.part {
-    margin-top: 0.5rem;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.83em;
-
-    img {
-      height: 1.5em;
     }
   }
 }
 
-.add-btn {
-  margin-top: 1rem;
+.divider {
+  @apply m-0;
 }

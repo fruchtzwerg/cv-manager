@@ -46,39 +46,19 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .container {
-  display: flex;
-  position: relative;
-  background-color: white;
-}
-
-.print {
-  position: fixed;
-  bottom: 4rem;
-  left: calc((100vw - var(--sidebar-width)) / 2 + 10.5cm - 3rem);
+  @apply flex relative bg-white;
 }
 
 #content {
-  width: 100%;
+  @apply w-full;
 }
 
 #measure {
-  position: absolute;
-  width: 1cm;
-  height: 0;
+  @apply absolute h-0 w-[1cm];
 }
 
 .page-marker {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @apply absolute top-0 bottom-0 left-0 right-0 z-20 pointer-events-none print:hidden;
   background: repeat-y url('../assets/page.svg');
-  z-index: 99;
-  pointer-events: none;
-
-  @media print {
-    display: none;
-  }
 }
 </style>

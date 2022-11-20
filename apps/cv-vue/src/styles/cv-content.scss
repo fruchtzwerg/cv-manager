@@ -1,62 +1,65 @@
 @mixin font-family() {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .section-heading {
+  @apply font-bold;
+
   font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--bluegray-800);
-  margin-top: 0;
+  color: var(--section-heading-color, #000);
+  line-height: 1.1111111;
 
   @include font-family();
 }
 
 .heading {
+  @apply underline font-black;
+
   font-size: 1.65rem;
-  text-decoration: underline;
-  font-weight: 900;
   color: var(--heading-color, --indigo-700);
-  margin-top: 0;
 
   @include font-family();
 }
 
 .title {
+  @apply font-light;
+
   font-size: 1.5rem;
-  font-weight: 300;
   color: var(--title-color, --indigo-700);
 
   @include font-family();
 }
 
 .caption {
+  @apply font-normal;
+
   font-size: 0.75rem;
-  font-weight: 400;
   color: var(--caption-color, --indigo-900);
 
   @include font-family();
 }
 
 .subtitle {
-  font-weight: 700;
+  @apply font-bold;
+
   color: var(--subtitle-color, --indigo-400);
 
   @include font-family();
 }
 
 .href {
+  @apply underline;
+
   color: var(--href-color, --indigo-400);
   font-size: 0.85rem;
-  text-decoration: underline;
 
   @include font-family();
 }
 
 .text {
-  color: black;
+  @apply prose;
   font-family: Quicksand;
-  text-align: justify;
 }

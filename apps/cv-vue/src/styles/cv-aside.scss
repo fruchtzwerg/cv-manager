@@ -23,7 +23,7 @@
   }
 
   &.first {
-    text-align: center;
+    @apply text-center;
   }
 }
 
@@ -39,39 +39,31 @@
 }
 
 ul.aside-list {
-  list-style-position: inside;
-  padding-left: 1rem;
-  margin: 0;
+  @apply list-disc list-inside pl-4 m-0;
 }
 
 .contact {
   .multiline {
-    display: grid;
+    @apply grid items-center gap-x-[.5em] gap-y-[.15em];
+
     grid-template-columns: auto 1fr;
     grid-template-areas:
       'icon street'
       'empty city';
-    align-items: center;
-    column-gap: 0.5em;
-    row-gap: 0.15em;
   }
 
   .line,
   .multiline {
     img {
-      height: 1em;
+      @apply h-4;
     }
   }
 
   .line {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
+    @apply inline-flex items-center gap-2;
   }
 }
 
 aside .editor .actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
+  @apply flex justify-end gap-2;
 }

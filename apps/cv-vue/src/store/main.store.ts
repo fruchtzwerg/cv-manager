@@ -7,5 +7,12 @@ export const useStore = defineStore('main', {
       open: true,
     },
   }),
+
+  actions: {
+    toggleSidebar() {
+      this.sidebar.open = !this.sidebar.open;
+    },
+  },
+
   persist: true,
 });

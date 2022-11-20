@@ -1,21 +1,21 @@
 <template>
   <div class="manager">
-    <draggable
-      v-model="skills"
-      tag="ol"
-      item-key="id"
-      :component-data="{ class: 'list' }"
-    >
+    <draggable v-model="skills" tag="ol" item-key="id" :component-data="{ class: 'list' }">
       <template #item="{ element: section, index }">
         <li class="item section">
           <h3 :class="{ first: !index }">
+            <icon-carbon-drag-vertical class="text-base" />
+
             <div class="ellipsis">{{ section.heading ?? '---' }}</div>
-            <Button
-              icon="pi pi-trash"
-              class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
+
+            <button
+              class="btn btn-circle btn-ghost btn-sm text-error hover:bg-error/20"
               @click="confirmDeleteSection(section)"
-            ></Button>
-            <Checkbox v-model="section.active" :binary="true"></Checkbox>
+            >
+              <icon-carbon-trash-can />
+            </button>
+
+            <input type="checkbox" class="checkbox checkbox-sm" v-model="section.active" />
           </h3>
 
           <draggable
@@ -26,25 +26,29 @@
           >
             <template #item="{ element: skill }">
               <div class="item part">
-                <i class="pi pi-bars"></i>
+                <icon-carbon-draggable />
+
                 <div class="ellipsis">{{ skill.value }}</div>
-                <Button
-                  icon="pi pi-trash"
-                  class="pad-left p-button-rounded p-button-text p-button-xs p-button-danger"
+
+                <button
+                  class="btn btn-circle btn-ghost btn-sm text-error hover:bg-error/20"
                   @click="confirmDeleteSkill(skill, section.id)"
-                ></Button>
-                <Checkbox v-model="skill.active" :binary="true"></Checkbox>
+                >
+                  <icon-carbon-trash-can />
+                </button>
+
+                <input type="checkbox" class="checkbox checkbox-sm" v-model="skill.active" />
               </div>
             </template>
           </draggable>
+
+          <div class="divider"></div>
         </li>
       </template>
     </draggable>
 
-    <Button
-      class="p-button-text p-button-rounded add-btn"
-      label="Add section"
-      icon="pi pi-plus"
+    <button
+      class="btn-add"
       @click="
         addSkillSection({
           active: true,
@@ -52,7 +56,9 @@
         })
       "
     >
-    </Button>
+      <icon-carbon-add />
+      Add section
+    </button>
   </div>
 </template>
 
@@ -61,15 +67,15 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
 import draggable from 'vuedraggable';
-import Button from 'primevue/button';
-import Checkbox from 'primevue/checkbox';
 
 import { useConfrimDelete } from '../../plugins/confirm-delete.plugin';
 import { useContentStore } from '../../store';
 
 export default defineComponent({
   name: 'SidebarManager',
-  components: { draggable, Button, Checkbox },
+  components: {
+    draggable,
+  },
   setup() {
     const store = useContentStore();
     const { skills } = storeToRefs(store);

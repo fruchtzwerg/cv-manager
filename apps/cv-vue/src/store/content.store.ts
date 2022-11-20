@@ -8,7 +8,7 @@ import { SkillNotFoundError } from '../utils/skill-not-found.error';
 import { cloneDeep, mapValues } from 'lodash-es';
 import { normalizeColor } from '../utils/normalize-color.util';
 import { VERSION } from '../constants/version.const';
-import { ContentState } from '../models/store/v1.model';
+import { ColorKey, ContentState } from '../models/store/v1.model';
 
 const CONTENT_DEFAULT: ContentState = {
   version: VERSION,
@@ -23,12 +23,13 @@ const CONTENT_DEFAULT: ContentState = {
   style: {
     colors: {
       primary: 'var(--indigo-900)',
-      'primary-text': '#ffffff',
+      'primary-text': '#FFFFFF',
+      'section-heading': '#000000',
       heading: 'var(--indigo-700)',
       title: 'var(--indigo-700)',
       caption: 'var(--indigo-900)',
-      subtitle: 'var(--indigo-400)',
-      href: 'var(--indigo-400)',
+      subtitle: 'var(--indigo-500)',
+      href: 'var(--indigo-500)',
     },
     sidebar: {
       width: 'min-content',
@@ -69,6 +70,16 @@ export const useContentStore = defineStore('content', {
   },
 
   actions: {
+    // colors
+    resetColor(colorKey: ColorKey) {
+      const defaultColor = getContentDefault().style.colors[colorKey];
+      this.style.colors[colorKey] = defaultColor;
+    },
+    resetColors() {
+      const defaultColors = getContentDefault().style.colors;
+      this.style.colors = defaultColors;
+    },
+
     // Skills
     createSkill(value: Skill['value']): Skill {
       return { id: uuid(), active: true, value };
@@ -104,10 +115,7 @@ export const useContentStore = defineStore('content', {
     addSection(section: Omit<Section, 'id' | 'parts'>) {
       this.content.sections.push({ id: uuid(), parts: [], ...section });
     },
-    patchSection(
-      id: Section['id'],
-      section: Partial<Omit<Section, 'id' | 'parts'>>
-    ) {
+    patchSection(id: Section['id'], section: Partial<Omit<Section, 'id' | 'parts'>>) {
       const index = this.content.sections.findIndex(s => s.id === id);
       if (index < 0) throw new SectionNotFoundError(id);
 
@@ -126,15 +134,9 @@ export const useContentStore = defineStore('content', {
     // Parts
     addPart(section: Section, part: Omit<SectionPart, 'id'>) {
       const id = uuid();
-      this.content.sections
-        ?.find(s => s === section)
-        ?.parts.push({ id, ...part });
+      this.content.sections?.find(s => s === section)?.parts.push({ id, ...part });
     },
-    patchPart(
-      id: SectionPart['id'],
-      sectionId: Section['id'],
-      part: Omit<SectionPart, 'id'>
-    ) {
+    patchPart(id: SectionPart['id'], sectionId: Section['id'], part: Omit<SectionPart, 'id'>) {
       const sec = this.content.sections.find(s => s.id === sectionId);
       const index = sec?.parts.findIndex(p => p.id === id);
 

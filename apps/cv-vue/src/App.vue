@@ -1,19 +1,18 @@
 <template>
-  <Toolbar id="toolbar" class="screen-only"></Toolbar>
+  <Toolbar id="toolbar" class="print:hidden"></Toolbar>
 
-  <Preview id="preview"></Preview>
+  <div :class="['preview-container', { 'lg:screen:mr-80': sidebar.open }]">
+    <Preview id="preview"></Preview>
+  </div>
+
   <Sidebar
     id="sidebar"
-    class="screen-only"
-    :style="{ width: sidebar.open ? 'var(--sidebar-width)' : 0 }"
+    class="print:!hidden rounded-box"
+    :class="{ 'max-xl:!-right-80': !sidebar.open }"
   ></Sidebar>
 </template>
 
 <script lang="ts">
-import 'primevue/resources/themes/lara-light-indigo/theme.css';
-import 'primevue/resources/primevue.min.css';
-import 'primeicons/primeicons.css';
-
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { useStore } from './store/main.store';
@@ -46,18 +45,12 @@ $margin: 1rem;
 $margin-top: 7rem;
 $margin-bottom: 2rem;
 
-#toolbar {
-  position: fixed;
-  top: $margin;
-  left: $margin;
-  right: $margin;
-  height: 4rem;
-  overflow: hidden;
-  border-radius: $margin;
-  background-color: white;
-  z-index: 999;
+.preview-container {
+  @apply screen:flex screen:justify-center screen:mt-24 screen:xl:mr-80 transition-[margin];
+}
 
-  @include mat.elevation(6);
+#toolbar {
+  @apply fixed top-4 left-4 right-4 rounded-box shadow-xl z-30;
 }
 
 #preview {
@@ -66,28 +59,24 @@ $margin-bottom: 2rem;
   min-width: $A4-width;
 
   @media screen {
-    margin: $margin-top auto $margin-bottom;
-    border-radius: 1rem;
-    overflow: hidden;
-    @include mat.elevation(4);
+    @apply bg-transparent rounded-box overflow-hidden shadow-lg;
   }
 }
 
 #sidebar {
-  position: fixed;
-  top: $margin-top;
-  bottom: $margin-bottom;
-  right: $margin;
-  transition: width 0.5s ease-out;
+  @apply fixed top-24 max-h-[calc(100vh_-_7rem)] right-4 z-30 flex flex-col overflow-hidden transition-[right];
 }
 </style>
 
 <style lang="scss">
-@use './styles/colors.scss';
 @use './styles/cv-aside.scss';
 @use './styles/cv-content.scss';
 @use './styles/sidebar.scss';
 @use './styles/animations.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @media print {
   @page {
@@ -96,8 +85,7 @@ $margin-bottom: 2rem;
   }
 
   * {
-    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
-    color-adjust: exact !important; /*Firefox*/
+    print-color-adjust: exact !important;
   }
 }
 
@@ -108,43 +96,31 @@ $margin-bottom: 2rem;
   }
 }
 
-.screen-only {
-  @media print {
-    display: none !important;
-  }
-}
-
-.print-only {
-  @media screen {
-    display: none !important;
-  }
+.btn-ghost.btn-error {
+  @apply text-error hover:bg-error/20;
 }
 
 body {
-  margin: 0;
+  @apply m-0;
+
   background-color: var(--gray-200);
 }
 
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   color: var(--bluegray-800);
 
   @media screen {
-    display: block;
-    margin-right: var(--sidebar-offset-width);
+    @apply block;
   }
 }
 
 .icon {
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 1.5rem;
-  width: 1.5rem;
-  position: relative;
+  @apply relative w-6 h-6 bg-no-repeat bg-contain;
 
   &-pb {
     background: url('./assets/page-break.svg');
@@ -154,22 +130,11 @@ body {
   }
 }
 
-.fab {
-  height: 6rem !important;
-  width: 6rem !important;
-
-  & .p-button-icon {
-    font-size: 2rem;
-  }
-}
-
 .ellipsis {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  @apply text-ellipsis overflow-hidden whitespace-nowrap;
 
   &.wrap {
-    white-space: normal;
+    @apply whitespace-normal;
   }
 }
 </style>

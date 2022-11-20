@@ -33,7 +33,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cv-vue:build",
-        "port": 4200
+        "port": 4200,
+        "hmr": true
       },
       "configurations": {
         "production": {
@@ -48,7 +49,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nrwl/vite:test",
       "outputs": ["{workspaceRoot}/coverage/apps/cv-vue"],
       "options": {
         "jestConfig": "apps/cv-vue/jest.config.ts",
