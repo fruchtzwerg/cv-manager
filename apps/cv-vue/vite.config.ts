@@ -6,11 +6,22 @@ import Icons from 'unplugin-icons/vite';
 import vueJSX from '@vitejs/plugin-vue-jsx';
 import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
+import preload from 'vite-plugin-preload';
+
+const htmlPlugin = () => {
+  return {
+    name: 'html-transform',
+    transformIndexHtml(html: string) {
+      return html.replace(/<!--.*?-->/g, '');
+    },
+  };
+};
 
 export default mergeConfig(baseConfig, {
   plugins: [
     vue(),
     vueJSX(),
+    preload(),
     Components({
       resolvers: [IconsResolver({ prefix: 'icon' })],
     }),
@@ -19,5 +30,6 @@ export default mergeConfig(baseConfig, {
       root: '../../',
       projects: ['tsconfig.base.json'],
     }),
+    htmlPlugin(),
   ],
 });
