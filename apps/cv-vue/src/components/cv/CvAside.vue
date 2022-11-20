@@ -3,12 +3,12 @@
     <div class="aside-section">
       <InlineControls :id="'contact'" page>
         <template #editor="{ visible, close }">
-          <ContactEditor
+          <AsyncContactEditor
             v-if="visible"
             v-bind="contactInfo"
             @save="saveContact($event), close()"
             @discard="close"
-          ></ContactEditor>
+          ></AsyncContactEditor>
         </template>
 
         <template v-slot="{ visible }">
@@ -21,12 +21,12 @@
       <div v-for="list in activeSkills" :key="list.id" class="aside-section">
         <InlineControls :page="false">
           <template #editor="{ visible, close }">
-            <SkillEditor
+            <AsyncSkillEditor
               v-bind="list"
               v-if="visible"
               @save="patchSkillSection(list.id, $event), close()"
               @discard="close"
-            ></SkillEditor
+            ></AsyncSkillEditor
           ></template>
 
           <template v-slot="{ visible }">
@@ -42,25 +42,26 @@
 
 <script lang="ts">
 import { storeToRefs } from 'pinia';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, defineAsyncComponent, ref } from 'vue';
 import { useElementBounding } from '@vueuse/core';
 
 import { ContactInfo } from '../../models/contact-info.model';
 import { useContentStore } from '../../store';
 
 import CvContact from './CvContact.vue';
-import ContactEditor from './ContactEditor.vue';
-import SkillEditor from './SkillEditor.vue';
 import CvAsideList from './CvAsideList.vue';
 import InlineControls from '../controls/InlineControls.vue';
+
+const AsyncContactEditor = defineAsyncComponent(() => import('./ContactEditor.vue'));
+const AsyncSkillEditor = defineAsyncComponent(() => import('./SkillEditor.vue'));
 
 export default defineComponent({
   name: 'CvAside',
   components: {
     CvContact,
     CvAsideList,
-    ContactEditor,
-    SkillEditor,
+    AsyncContactEditor,
+    AsyncSkillEditor,
     InlineControls,
   },
   setup() {

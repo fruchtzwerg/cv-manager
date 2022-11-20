@@ -20,17 +20,12 @@
 import { defineComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import TabPanel from 'primevue/tabpanel';
-import TabView from 'primevue/tabview';
-
 import { tabs } from '../constants/tabs.const';
 import { useStore } from '../store';
 
 export default defineComponent({
   name: 'Sidebar',
   components: {
-    TabPanel,
-    TabView,
     ...(tabs.map(tab => tab.component) as any),
     ...(tabs.map(tab => tab.icon) as any),
   },

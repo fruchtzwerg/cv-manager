@@ -5,28 +5,34 @@
     <Preview id="preview"></Preview>
   </div>
 
-  <Sidebar
+  <AsyncSidebar
     id="sidebar"
     class="print:!hidden rounded-box"
     :class="{ 'max-xl:!-right-80': !sidebar.open }"
-  ></Sidebar>
+  ></AsyncSidebar>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { useStore } from './store/main.store';
 
 import Toolbar from './components/Toolbar.vue';
 import Preview from './components/Preview.vue';
-import Sidebar from './components/Sidebar.vue';
+
+const AsyncSidebar = defineAsyncComponent({
+  loader: () => import('./components/Sidebar.vue'),
+  loadingComponent: () => (
+    <progress class="fixed top-0 left-0 right-0 h-1 progress progress-primary w-screen"></progress>
+  ),
+});
 
 export default defineComponent({
   name: 'App',
   components: {
     Toolbar,
     Preview,
-    Sidebar,
+    AsyncSidebar,
   },
   setup() {
     const store = useStore();

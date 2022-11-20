@@ -3,7 +3,7 @@
     <slot name="trigger"></slot>
 
     <teleport to="body">
-      <input v-model="isRevealed" type="checkbox" id="modal" class="modal-toggle" />
+      <input v-model="isRevealed" type="checkbox" class="modal-toggle" />
       <div class="modal">
         <div class="modal-box">
           <h3 class="font-bold text-lg">

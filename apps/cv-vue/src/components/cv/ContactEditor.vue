@@ -47,8 +47,6 @@
 import { computed, defineComponent, PropType, ref } from 'vue';
 import { cloneDeep, capitalize } from 'lodash-es';
 
-import Button from 'primevue/button';
-
 import { ContactInfo } from '../../models/contact-info.model';
 import { icons } from '../../constants/icons.const';
 
@@ -61,7 +59,7 @@ const records: ContactInfo['records'] = {
 
 export default defineComponent({
   name: 'ContactEditor',
-  components: { Button, ...(Object.values(icons) as any) },
+  components: { ...(Object.values(icons) as any) },
   props: {
     heading: String,
     records: {

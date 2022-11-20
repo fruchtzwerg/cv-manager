@@ -25,7 +25,7 @@
             :component-data="{ class: 'list' }"
           >
             <template #item="{ element: skill }">
-              <div class="item part">
+              <li class="item part">
                 <icon-carbon-draggable />
 
                 <div class="ellipsis">{{ skill.value }}</div>
@@ -38,7 +38,7 @@
                 </button>
 
                 <input type="checkbox" class="checkbox checkbox-sm" v-model="skill.active" />
-              </div>
+              </li>
             </template>
           </draggable>
 

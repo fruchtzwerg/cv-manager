@@ -7,13 +7,13 @@
         @update:pagebreak="patchSection(section.id, { pagebreak: $event })"
       >
         <template #editor="{ visible, close }">
-          <SectionEditor
+          <AsyncSectionEditor
             v-if="visible"
             v-bind="section"
             @save="patchSection(section.id, $event), close()"
             @discard="close"
             class="section-heading first"
-          ></SectionEditor>
+          ></AsyncSectionEditor>
         </template>
 
         <template v-slot="{ visible }">
@@ -34,12 +34,12 @@
       >
         <InlineControls :id="part.id" v-model:pagebreak="part.pagebreak">
           <template #editor="{ visible, close }">
-            <PartEditor
+            <AsyncPartEditor
               v-if="visible"
               v-bind="part"
               @save="patchPart(part.id, section.id, $event), close()"
               @discard="close"
-            ></PartEditor>
+            ></AsyncPartEditor>
           </template>
 
           <template v-slot="{ visible }">
@@ -52,23 +52,24 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import CvSectionPart from './CvSectionPart.vue';
-import SectionEditor from './SectionEditor.vue';
-import PartEditor from './PartEditor.vue';
 import InlineControls from '../controls/InlineControls.vue';
 
 import { useContentStore } from '../../store';
+
+const AsyncPartEditor = defineAsyncComponent(() => import('./PartEditor.vue'));
+const AsyncSectionEditor = defineAsyncComponent(() => import('./SectionEditor.vue'));
 
 export default defineComponent({
   name: 'CvSection',
   components: {
     InlineControls,
     CvSectionPart,
-    PartEditor,
-    SectionEditor,
+    AsyncPartEditor,
+    AsyncSectionEditor,
   },
   props: {
     id: String,
