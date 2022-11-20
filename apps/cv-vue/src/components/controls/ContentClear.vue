@@ -1,41 +1,35 @@
 <template>
-  <Modal class="btn btn-ghost btn-error gap-2" @confirmed="clear()">
-    <template #trigger>
-      <icon-carbon-trash-can class="text-lg" />
-      <span>Clear</span>
-    </template>
-
-    <template #heading>Clear CV</template>
-
-    <template #message>
-      <div class="flex items-center gap-4">
-        <icon-carbon-warning-alt class="text-4xl text-warning-content dark:text-warning" />
-        <span
-          >You are about to remove
-          <span class="font-bold underline text-warning-content dark:text-warning">all</span>
-          data. Are you sure?</span
-        >
-      </div>
-    </template>
-  </Modal>
+  <button class="btn btn-ghost btn-error" @click="confirmClear()">
+    <icon-carbon-trash-can class="text-lg" />
+    Clear
+  </button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import Modal from '../dialog/Modal.vue';
+<script lang="tsx">
+import { defineComponent, FunctionalComponent } from 'vue';
+import { useConfirmDialog } from '../../plugins/confirm-delete.plugin';
 
 import { useContentStore } from '../../store';
 
+const Message: FunctionalComponent = () => (
+  <span>
+    <>You are about to remove </>
+    <span class="font-bold underline text-warning-content dark:text-warning">all</span>
+    <> data. Are you sure?</>
+  </span>
+);
+
 export default defineComponent({
   name: 'ContentClear',
-  components: { Modal },
 
   setup() {
     const store = useContentStore();
+    const confirmClear = useConfirmDialog(() => store.$reset(), {
+      message: <Message />,
+      icon: <icon-carbon-warning-alt class="text-4xl text-warning" />,
+    });
 
-    const clear = () => store.$reset();
-
-    return { clear };
+    return { confirmClear };
   },
 });
 </script>

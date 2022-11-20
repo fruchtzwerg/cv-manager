@@ -10,6 +10,8 @@
     class="print:!hidden rounded-box"
     :class="{ 'max-xl:!-right-80': !sidebar.open }"
   ></AsyncSidebar>
+
+  <ConfirmDialog />
 </template>
 
 <script lang="tsx">
@@ -19,6 +21,7 @@ import { useStore } from './store/main.store';
 
 import Toolbar from './components/Toolbar.vue';
 import Preview from './components/Preview.vue';
+import ConfirmDialog from './components/dialog/ConfirmDialog.vue';
 
 const AsyncSidebar = defineAsyncComponent({
   loader: () => import('./components/Sidebar.vue'),
@@ -33,6 +36,7 @@ export default defineComponent({
     Toolbar,
     Preview,
     AsyncSidebar,
+    ConfirmDialog,
   },
   setup() {
     const store = useStore();

@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ConfirmDialog: typeof import('./src/components/dialog/ConfirmDialog.vue')['default']
     ContactEditor: typeof import('./src/components/cv/ContactEditor.vue')['default']
     ContentClear: typeof import('./src/components/controls/ContentClear.vue')['default']
     ContentDownload: typeof import('./src/components/controls/ContentDownload.vue')['default']
@@ -29,6 +30,7 @@ declare module '@vue/runtime-core' {
     IconCarbonDraggable: typeof import('~icons/carbon/draggable')['default']
     IconCarbonDragVertical: typeof import('~icons/carbon/drag-vertical')['default']
     IconCarbonEdit: typeof import('~icons/carbon/edit')['default']
+    IconCarbonInformation: typeof import('~icons/carbon/information')['default']
     IconCarbonMenu: typeof import('~icons/carbon/menu')['default']
     IconCarbonPageBreak: typeof import('~icons/carbon/page-break')['default']
     IconCarbonPrinter: typeof import('~icons/carbon/printer')['default']
@@ -37,7 +39,6 @@ declare module '@vue/runtime-core' {
     IconCarbonTrashCan: typeof import('~icons/carbon/trash-can')['default']
     IconCarbonWarningAlt: typeof import('~icons/carbon/warning-alt')['default']
     InlineControls: typeof import('./src/components/controls/InlineControls.vue')['default']
-    Modal: typeof import('./src/components/dialog/Modal.vue')['default']
     MouseOver: typeof import('./src/components/util/MouseOver.vue')['default']
     PartEditor: typeof import('./src/components/cv/PartEditor.vue')['default']
     Preview: typeof import('./src/components/Preview.vue')['default']

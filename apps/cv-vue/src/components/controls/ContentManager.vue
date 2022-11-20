@@ -62,8 +62,6 @@
     >
       Add section
     </ButtonAdd>
-
-    <ConfirmDialog></ConfirmDialog>
   </div>
 </template>
 
@@ -71,12 +69,10 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent, FunctionalComponent } from 'vue';
 
-import { useConfrimDelete } from '../../plugins/confirm-delete.plugin';
+import { useConfirmDelete } from '../../plugins/confirm-delete.plugin';
 import { useContentStore } from '../../store';
 
 import draggable from 'vuedraggable';
-
-import ConfirmDialog from 'primevue/confirmdialog';
 
 import { getHeading } from '../../utils/get-heading.util';
 
@@ -97,7 +93,6 @@ export default defineComponent({
   name: 'ContentManager',
   components: {
     draggable,
-    ConfirmDialog,
     ButtonRemove,
     ButtonAdd,
   },
@@ -106,8 +101,8 @@ export default defineComponent({
     const { addPart, removePart, addSection, removeSection } = store;
     const { content } = storeToRefs(store);
 
-    const confirmDeleteSection = useConfrimDelete(removeSection);
-    const confirmDeletePart = useConfrimDelete(removePart);
+    const confirmDeleteSection = useConfirmDelete(removeSection);
+    const confirmDeletePart = useConfirmDelete(removePart);
 
     const actions = {
       addPart,

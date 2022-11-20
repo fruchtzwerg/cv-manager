@@ -25,9 +25,8 @@
 <script lang="tsx">
 import { defineComponent, ref, FunctionalComponent, Component } from 'vue';
 
-import Modal from '../dialog/Modal.vue';
-
 import { useContentStore } from '../../store';
+import { useConfirmDialog } from '../../plugins/confirm-delete.plugin';
 
 interface Item {
   label: string;
@@ -35,25 +34,19 @@ interface Item {
   command: () => void;
 }
 
-const MenuItem: FunctionalComponent<{ item: Item }> = ({ item }) => (
-  <Modal onConfirmed={item.command}>
-    {{
-      trigger: () => (
-        <>
-          {item.icon}
-          {item.label}
-        </>
-      ),
-      heading: () => 'Replace content',
-      message: () => (
-        <div class="flex items-center gap-4">
-          <icon-carbon-warning-alt class="text-4xl text-warning" />
-          <span>This will replace your current content. Are you sure?</span>
-        </div>
-      ),
-    }}
-  </Modal>
-);
+const MenuItem: FunctionalComponent<{ item: Item }> = ({ item }) => {
+  const confirm = useConfirmDialog(item.command, {
+    message: 'This will replace your current content. Are you sure?',
+    icon: <icon-carbon-warning-alt class="text-4xl text-warning" />,
+  });
+
+  return (
+    <button onClick={confirm}>
+      {item.icon}
+      {item.label}
+    </button>
+  );
+};
 
 export default defineComponent({
   name: 'Import',

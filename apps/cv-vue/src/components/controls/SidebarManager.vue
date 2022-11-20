@@ -68,7 +68,7 @@ import { defineComponent } from 'vue';
 
 import draggable from 'vuedraggable';
 
-import { useConfrimDelete } from '../../plugins/confirm-delete.plugin';
+import { useConfirmDelete } from '../../plugins/confirm-delete.plugin';
 import { useContentStore } from '../../store';
 
 export default defineComponent({
@@ -81,8 +81,8 @@ export default defineComponent({
     const { skills } = storeToRefs(store);
     const { addSkillSection, removeSkillSection, removeSkill } = store;
 
-    const confirmDeleteSection = useConfrimDelete(removeSkillSection);
-    const confirmDeleteSkill = useConfrimDelete(removeSkill);
+    const confirmDeleteSection = useConfirmDelete(removeSkillSection);
+    const confirmDeleteSkill = useConfirmDelete(removeSkill);
 
     return {
       skills,

@@ -23,6 +23,7 @@ export default mergeConfig(baseConfig, {
     vueJSX(),
     preload(),
     Components({
+      include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
       resolvers: [IconsResolver({ prefix: 'icon' })],
     }),
     Icons(),
