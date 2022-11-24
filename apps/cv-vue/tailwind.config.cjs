@@ -1,6 +1,8 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/angular/tailwind');
 const { join } = require('path');
 
+const { RETRO } = require('../../libs/themes/src/lib/themes');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -75,7 +77,7 @@ module.exports = {
     require('./tailwind/plugins/colors.plugin')([500, 700, 900].map(light => `indigo-${light}`)),
   ],
   daisyui: {
-    themes: ['winter', 'night'],
-    darkTheme: 'night',
+    themes: ['winter', 'night', RETRO],
+    darkTheme: 'retro',
   },
 };

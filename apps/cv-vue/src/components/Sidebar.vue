@@ -1,5 +1,5 @@
 <template>
-  <div class="w-80 bg-base-100/80 backdrop-blur-md shadow-md overflow-auto">
+  <div class="w-80 bg-base-200/80 backdrop-blur-md shadow-md overflow-auto">
     <div class="tabs flex-nowrap w-full justify-center">
       <button
         v-for="(tab, index) in tabs"

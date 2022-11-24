@@ -38,7 +38,7 @@
     "@savvywombat/tailwindcss-grid-areas": "^3.0.0",
     "@tailwindcss/typography": "^0.5.8",
     "@types/lodash-es": "^4.17.6",
-    "@types/node": "16.11.7",
+    "@types/node": "18.7.1",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/parser": "5.43.0",

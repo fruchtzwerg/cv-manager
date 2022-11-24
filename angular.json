@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "cv-vue": "apps/cv-vue",
-    "cv-vue-e2e": "apps/cv-vue-e2e"
+    "cv-vue-e2e": "apps/cv-vue-e2e",
+    "themes": "libs/themes"
   }
 }

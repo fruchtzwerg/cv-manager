@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar w-auto bg-base-100/80 backdrop-blur-md">
+  <div class="navbar w-auto bg-base-200/80 backdrop-blur-md">
     <div class="flex-1">
       <div class="btn-group">
         <ContentImport />
