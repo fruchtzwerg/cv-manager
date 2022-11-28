@@ -23,7 +23,7 @@ export function useConfirmDelete(
   accept: AcceptFn,
   options: PartialOptions = {}
 ): ShowDeleteDialogFn {
-  const Confirm = inject(ConfirmDeleteSymbol) as typeof DeleteConfirmationService.confirmDelete;
+  const Confirm = inject<typeof DeleteConfirmationService.confirmDelete>(ConfirmDeleteSymbol);
 
   if (!Confirm) {
     throw new Error('No Delete Confirmation provided!');
@@ -36,7 +36,7 @@ export function useConfirmDialog<T = any>(
   accept: (data?: T) => void,
   options: PartialOptionsWithMessage
 ): ShowDialogFn<T> {
-  const Confirm = inject(ConfirmDialogSymbol) as typeof DeleteConfirmationService.confirm;
+  const Confirm = inject<typeof DeleteConfirmationService.confirm>(ConfirmDialogSymbol);
 
   if (!Confirm) {
     throw new Error('No Confirmation provided!');

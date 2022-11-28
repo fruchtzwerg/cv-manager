@@ -77,7 +77,7 @@ module.exports = {
     require('./tailwind/plugins/colors.plugin')([500, 700, 900].map(light => `indigo-${light}`)),
   ],
   daisyui: {
-    themes: ['winter', 'night', RETRO],
+    themes: ['winter', RETRO],
     darkTheme: 'retro',
   },
 };

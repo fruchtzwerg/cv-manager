@@ -49,7 +49,7 @@ const MenuItem: FunctionalComponent<{ item: Item }> = ({ item }) => {
 };
 
 export default defineComponent({
-  name: 'Import',
+  name: 'ContentImport',
   components: { MenuItem },
 
   setup() {

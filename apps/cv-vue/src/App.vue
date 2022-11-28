@@ -49,8 +49,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@material/elevation' as mat;
-
 $margin: 1rem;
 $margin-top: 7rem;
 $margin-bottom: 2rem;
